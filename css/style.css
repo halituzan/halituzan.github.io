@@ -984,3 +984,8 @@ section {
     padding-right: 20px 15px;
   }
 }
+
+.designs img {
+  width: 100%;
+}
+
