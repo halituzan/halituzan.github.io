@@ -8,7 +8,6 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta content="" name="description" />
     <meta content="" name="keywords" />
-
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
@@ -19,6 +18,7 @@
     />
 
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./css/print.min.css" rel="stylesheet" />
     <link href="assets/aos/aos.css" rel="stylesheet" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="assets/bootstrap/icons/bootstrap-icons.css" rel="stylesheet" />
@@ -109,13 +109,15 @@
               >
             </li>
             <!-- <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>-->
-            <li><a href="./designs/index.html" class="nav-link scrollto"><i class='bx bx-chart'></i> <span>Designs</span></a></li> 
+            <li>
+              <a href="./designs/index.html" class="nav-link scrollto"
+                ><i class="bx bx-chart"></i> <span>Designs</span></a
+              >
+            </li>
           </ul>
         </nav>
         <!-- .nav-menu -->
-        
       </div>
-     
     </header>
     <!-- End Header -->
 
@@ -727,7 +729,7 @@
                 />
                 <div class="portfolio-links">
                   <a
-                    href="https://youtube-pick-winner.netlify.app/"
+                    href="https://youtube-comment-picker.netlify.app/"
                     class="portfolio-lightbox1"
                     title="React Register Page"
                     target="_blank"
@@ -1229,6 +1231,15 @@
           <i class="bx bxs-download"></i>
           <a href="./images/cv.pdf" target="_blank" download> Download CV</a>
         </p>
+        <p>
+          <i class="bx bxs-printer"></i>
+          <a
+            class="cursor-pointer"
+            onclick="printJS({printable:'images/cv.pdf', type:'pdf', showModal:true})"
+          >
+            Print CV</a
+          >
+        </p>
       </div>
     </footer>
     <!-- End  Footer -->
@@ -1243,7 +1254,7 @@
     <script src="assets/purecounter/purecounter.js"></script>
     <!-- <script src="assets/aos/aos.js"></script> -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+    <script src="./js/assets/print.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/glightbox/glightbox.min.js"></script>
     <script src="assets/isotype-layout/isotope.pkgd.min.js"></script>
