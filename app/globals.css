@@ -1,0 +1,54 @@
+@tailwind base;
+
+@tailwind components;
+@tailwind utilities;
+
+html {
+    font-family: var(--font-inter);
+}
+
+h1 {
+    font-family: var(--font-roboto-mono);
+}
+
+/* src/app/globals.css */
+
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+:root {
+    --primary: transparent;
+    --secondary: #64748b;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--secondary);
+    border-radius: 14px;
+    border: 3px solid var(--primary);
+}
