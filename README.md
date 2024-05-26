@@ -1,142 +1,40 @@
-# VS Code Template NextJS Portfolio
+<h1> Hello Fellow < Developers/ >!</h1>
+<p align='center'>
 
-It is a software developer portfolio site designed based on the VS Code editor. Created with Next.js 14.2.3 Version. Information is added statically inside. There is no database connection.
+</p>
+<div size='20px'>Hi there, I'm Halit, Software for me is not only a job but also a source of entertainment and a hobby. :smile: 
+</div>
 
-## 1. Language Configuration
-Multi-language configuration has been added to the theme with i18n. There are two different languages available: Turkish and English. In addition to these languages, you can also add your own languages. The infrastructure for RTL languages such as Arabic is not currently available. However, you can also do your own language optimization by forking. I am waiting for your support for RTL languages.
+<h2> About Me</h2>
 
-Configuring the language configuration is very easy. While you can separate language files for each of your components, you can also provide this control from a single file.
 
-### Language Files
 
-You should keep your language files under public/locales. Like the "en" folder for English and the "tr" folder for Turkish. Language files must be in JSON format, but you can shape them according to your wishes. It is set like this by default.
+- 🌱 I’m currently learning React Native 
 
-Example:
-```
-// public/locales/tr/skills.json
-{
-    "title.software": "Yazılım Teknolojileri",
-    "title.ui": "UI ve CSS Kütüphaneleri",
-    "title.design": "Tasarım Programları"
-}
-// public/locales/en/skills.json
-{
-    "title.software": "Software Technologies",
-    "title.ui": "UI And CSS Libraries",
-    "title.design": "Design Programs"
-}
+- 💬 Talk to me about JavaScript, TypeScript, ReactJs, NextJs, MongoDB, NodeJs, HTML, CSS, Tailwindcss, Bootstrap, MUI, MantineUI
 
-```
+<h2> Skills </h2>
+<a href= https://github.com/halituzan?tab=repositories&q=&type=&language=reactjs&sort= > <img width ='32px' src ='https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/reactjs.svg'> </a>
+<a style="background-color: white;" href= https://github.com/halituzan?tab=repositories&q=&type=&language=nextjs&sort= >
+<img width ='32px' src ='https://www.svgrepo.com/show/354113/nextjs-icon.svg'> </a>
+<a href= https://github.com/halituzan?tab=repositories&q=&type=&language=javascript&sort= > <img width ='32px' src ='https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/javascript.svg'> </a>
+<a href= https://github.com/halituzan?tab=repositories&q=&type=&language=typescript&sort= > <img width ='32px' src ='https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/typescript.svg'> </a>
+<a href= https://github.com/halituzan?tab=repositories&q=&type=&language=html&sort= > <img width ='32px' src ='https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/html.svg'> </a>
+<a href= https://github.com/halituzan?tab=repositories&q=&type=&language=css&sort= > <img width ='32px' src ='https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/css.svg'> </a>
+<a href= https://github.com/halituzan?tab=repositories&q=&type=&language=bootstrap&sort= > <img width ='32px' src ='https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/bootstrap.svg'> </a>
+<a href= https://github.com/halituzan?tab=repositories&q=&type=&language=tailwind&sort= > <img width ='32px' src ='https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/tailwind.svg'> </a>
+<a href= https://github.com/halituzan?tab=repositories&q=&type=&language=redux&sort= > <img width ='32px' src ='https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/redux.svg'> </a>
+  
+<h2> Connect with me</h2>
+<a href = 'https://www.linkedin.com/in/halituzan'> <img width = '32px' align= 'center' src="https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/linked-in-alt.svg"/></a> 
+<a href = 'https://www.twitter.com/uzandev'> <img width = '32px' align= 'center' src="https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/twitter.svg"/></a> 
+<a href = 'https://medium.com/@halituzan'> <img width = '32px' align= 'center' src="https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/medium.svg"/></a> 
+<a href = 'https://halituzan.github.io'> <img width = '32px' align= 'center' src="https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/portfolio.png"/></a> 
+<a href = 'https://www.github.com/halituzan'> <img width = '32px' align= 'center' src="https://raw.githubusercontent.com/rahulbanerjee26/githubAboutMeGenerator/main/icons/github.svg"/></a> 
 
-Configuration i18n: In order to use your language files throughout the project, you need to configure your i18n.tsx file.
-```
-// app/Configs/i18n.tsx
-import trSkills from "../../public/locales/tr/skills.json";
-import enSkills from "../../public/locales/en/skills.json";
 
-const defaultLang = "tr";
-const resources = {
-  tr: {skills: trSkills},
-  en: {skills: enSkills}
-};
-const initLanguage = () => {
-  i18n.use(initReactI18next).init({
-    compatibilityJSON: "v3",
-    lng: window.localStorage.getItem("lng") ?? defaultLang,
-    fallbackLng: window.localStorage.getItem("lng") ?? defaultLang,
-    resources,
-    interpolation: {
-      escapeValue: false,
-    },
-  });
-};
-export default { initLanguage };
-```
+<h2> Most Used Languages </h2>
+  
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=halituzan&layout=donut&langs_count=8) [![Harlok's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=halituzan)](https://halituzan.github.io)
 
-After completing the configuration, you can use the code example below to use throughout the project.
 
-```
-// app/Components/Main/Pages/Skills.tsx
-
-// Other imports...
-import { useTranslation } from "react-i18next";
-
-const Skills = (props: Props) => {
-
-const { t } = useTranslation("skills");
-
-return (
-    <div className='w-full p-5 h-[calc(100vh-107px)] overflow-auto'>
-    <h2>{t("title.software")}</h2>
-
-    // Other codes...
-)}
-
-export default Skills;
-```
-
-## 2. Configuration of General Information
-
-I tried to control this information from a single area by keeping some basic information in the Config file, and I tried to control this information dynamically from a single point by adding it to the language configuration.
-
-I plan to increase the dynamism by inserting this information into the database structure during version updates, but for now, this information should be provided statically.
-
-### Config.tsx Configuration
-
-Various information is written in our config file. The information you write in the relevant fields in this file goes to the places where it should be among the codes. Various options are also presented in this file.
-
-Via this file:
-- You can determine which is the default mode of your site.
-- On the About page, you can let us know which keywords should be highlighted in your description section. 
-- For the Skills page, you can categorize your skills according to which field you have and give them the icons you want. For icons you should use the [Iconify](https://icon-sets.iconify.design/) Library.
-- You must add information about yourself in the Information field.
-- You can add your social media links from the social area.
-- You can add your work history from the workHistory field. It's important to stick to the template here. If you want to do more customization. You will need to make changes to the *app/Components/Main/Pages/WorkHistory.tsx* file.
-- You can add the projects in your portfolio from the portfolio field. It's important to stick to the template here. If you want to do more customization. You will need to make changes to the *app/Components/Main/Pages/Portfolio.tsx* file.
-
-## 3. Color Configuration
-
-For the color scheme, you can specify the colors for dark mode and light mode. You should use these codes and the color scheme in the *tailwind.config.ts* file. 6 colors were selected for dark mode and 6 colors for light mode. The selected codes were taken from the tailwindcss color scheme, but you can add any color codes you want here. The theme has slate codes by default.
-
-Sample code template:
-
-```
-// tailwind.config.ts
-import type { Config } from "tailwindcss";
-const config: Config = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        dark1: "#020617", // slate-950
-        dark2: "#0f172a", // slate-900
-        dark3: "#1e293b", // slate-800
-        dark4: "#334155", // slate-700
-        dark5: "#475569", // slate-600
-        dark6: "#64748b", // slate-500
-        light1: "#cbd5e1", // slate-400
-        light2: "#e2e8f0", // slate-300
-        light3: "#e2e8f0", // slate-200
-        light4: "#f1f5f9", // slate-100
-        light5: "#f8fafc", // slate-50
-        light6: "#ffffff", // white
-      },
-    },
-  },
-  plugins: [],
-};
-export default config;
-```
-
-## 4. Wakatime Badge
- 
-If you want your [Wakatime](https://wakatime.com/) working hours to be visible, you must add your wakatime api key to your .env file. The env.example file was created for this.
-```
-// .env
-NEXT_PUBLIC_WAKATIME_API_KEY=YOUR_WAKATIME_API_KEY
-```
-For social media badges in the footer component, you must manually change them within the component.
-path: *app/Layout/Footer.tsx*
