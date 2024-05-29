@@ -13,5 +13,8 @@
     "welcome.pages": "To view pages",
     "welcome.search": "To search pages",
     "welcome.lang": "To change the language",
-    "welcome.mode": "To change the mode"
+    "welcome.mode": "To change the mode",
+    "cv.preview": "Show CV",
+    "cv.download": "Download CV",
+    "cv.print": "Print CV"
 }

@@ -85,22 +85,22 @@ export const InfoText = ({
       }`}
     >
       <p className={`select-none w-1/2 flex md:text-md text-sm text-end justify-end`}>{text}</p>
-      <span className='ml-5 select-none w-1/2'>
+      <div className='ml-5 select-none w-1/2 flex'>
         {keyList.map((item, index) => {
           return (
-            <span
+            <div
               key={index}
-              className={` ${
+              className={`animate-heartBeat ${
                 isOdd(index)
                   ? "mx-2"
                   : "border border-slate-400 rounded md:text-md text-sm  p-1 px-2"
               }`}
             >
               {item}
-            </span>
+            </div>
           );
         })}
-      </span>
+      </div>
     </div>
   );
 };

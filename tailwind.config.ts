@@ -20,6 +20,21 @@ const config: Config = {
         light5: "#f8fafc", // slate-50
         light6: "#ffffff", // white
       },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-15deg)" },
+          "50%": { transform: "rotate(15deg)" },
+        },
+        heartBeat: {
+          "0%": { transform: "scale(1);" },
+          "50%": { transform: "scale(1.1);" },
+          "100%": { transform: "scale(1);" },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 0.5s ease-in-out",
+        heartBeat: "heartBeat 1s",
+      },
     },
   },
   plugins: [],

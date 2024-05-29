@@ -13,5 +13,8 @@
     "welcome.pages": "Sayfaları görüntülemek için",
     "welcome.search": "Sayfalarda arama için",
     "welcome.lang": "Dili değiştirmek için",
-    "welcome.mode": "Modu değiştirmek için"
+    "welcome.mode": "Modu değiştirmek için",
+    "cv.preview":"CV Görüntüle",
+    "cv.download":"CV İndir",
+    "cv.print":"CV Yazdır"
 }

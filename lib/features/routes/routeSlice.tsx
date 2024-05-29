@@ -99,16 +99,33 @@ const routeSlice = createSlice({
       state.selectedPageList = filteredArray;
       state.pageList = filteredList;
     },
+    transitionPage: (
+      state,
+      action: PayloadAction<{ index: number; type: string }>
+    ) => {
+      if (action.payload.type === "prev") {
+        
+      }
+      if (action.payload.type === "next") {
+      }
+    },
   },
 });
 
-export const { setCurrentSide, setSelectedPagelist, openCurrentPage } =
-  routeSlice.actions;
+export const {
+  setCurrentSide,
+  setSelectedPagelist,
+  openCurrentPage,
+  transitionPage,
+} = routeSlice.actions;
 export const selectCurrentSide = (state: { routes: RouteProps }) =>
   state.routes.currentSide;
 export const selectedPageList = (state: { routes: RouteProps }) =>
   state.routes.selectedPageList;
 export const pageListing = (state: { routes: RouteProps }) =>
   state.routes.pageList;
+export const currentPageIndex = (state: { routes: RouteProps }) => {
+  return state.routes.selectedPageList.findIndex((i) => i.isOpen);
+};
 
 export default routeSlice.reducer;

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectedPageList,
   setCurrentSide,
+  transitionPage,
 } from "@/lib/features/routes/routeSlice";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
@@ -14,7 +15,11 @@ const Navbar = (props: Props) => {
   const { t } = useTranslation("common");
   const { theme } = useTheme();
   const selectPageList = useSelector(selectedPageList);
+
   const currentPage = selectPageList.find((i) => i.isOpen);
+  const currentPageIndex = selectPageList.findIndex((i) => i.isOpen);
+  console.log(currentPageIndex);
+
   const [isSearch, setIsSearch] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -29,30 +34,10 @@ const Navbar = (props: Props) => {
           );
         });
       }
-      // else if (elem.mozRequestFullScreen) {
-      //   // Firefox
-      //   elem.mozRequestFullScreen();
-      // } else if (elem.webkitRequestFullscreen) {
-      //   // Chrome, Safari and Opera
-      //   elem.webkitRequestFullscreen();
-      // } else if (elem.msRequestFullscreen) {
-      //   // IE/Edge
-      //   elem.msRequestFullscreen();
-      // }
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
       }
-      // else if (document.mozCancelFullScreen) {
-      //   // Firefox
-      //   document.mozCancelFullScreen();
-      // } else if (document.webkitExitFullscreen) {
-      //   // Chrome, Safari and Opera
-      //   document.webkitExitFullscreen();
-      // } else if (document.msExitFullscreen) {
-      //   // IE/Edge
-      //   document.msExitFullscreen();
-      // }
     }
     setIsFullscreen(!isFullscreen);
   };
@@ -68,6 +53,12 @@ const Navbar = (props: Props) => {
   const changeLanguage = (lng: string) => {
     window.localStorage.setItem("lng", lng);
     router.reload();
+  };
+  const handlePrev = () => {
+    // dispatch(transitionPage({ index: currentPageIndex, type: "prev" }));
+  };
+  const handleNext = () => {
+    // dispatch(transitionPage({ index: currentPageIndex, type: "next" }));
   };
 
   useEffect(() => {
@@ -109,8 +100,7 @@ const Navbar = (props: Props) => {
     }
   }, [isSearch]);
 
-  const navBg =
-    theme === "dark" ? "bg-dark3 text-light5/90" : "bg-light3";
+  const navBg = theme === "dark" ? "bg-dark3 text-light5/90" : "bg-light3";
   return (
     <div className={`w-full flex justify-between items-center  h-10 ${navBg}`}>
       <div className='w-[55px] flex justify-center'>
@@ -119,6 +109,7 @@ const Navbar = (props: Props) => {
       <div className='flex items-center'>
         <div className='flex'>
           <Icon
+            onClick={handlePrev}
             icon='formkit:arrowleft'
             className={`cursor-pointer ${
               theme === "dark"
@@ -127,6 +118,7 @@ const Navbar = (props: Props) => {
             }`}
           />
           <Icon
+            onClick={handleNext}
             icon='formkit:arrowright'
             className={`cursor-pointer ${
               theme === "dark"
