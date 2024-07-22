@@ -101,12 +101,20 @@ const routeSlice = createSlice({
     },
     transitionPage: (
       state,
-      action: PayloadAction<{ index: number; type: string }>
+      action: PayloadAction<{ index: number; arr: any; type: string }>
     ) => {
-      if (action.payload.type === "prev") {
-        
+      const { arr, index, type } = action.payload;
+      if (type === "prev") {
+        console.log("prev", index);
+        console.log("selectedPageList", arr);
+        const currentPageIndex = arr.findIndex((i: any) => i.isOpen);
+        if (arr.length === index) {
+          state.currentSide = "";
+        }
       }
-      if (action.payload.type === "next") {
+      if (type === "next") {
+        console.log("next", index);
+        console.log("selectedPageList", arr);
       }
     },
   },

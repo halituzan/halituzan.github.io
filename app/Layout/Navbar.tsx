@@ -55,10 +55,22 @@ const Navbar = (props: Props) => {
     router.reload();
   };
   const handlePrev = () => {
-    // dispatch(transitionPage({ index: currentPageIndex, type: "prev" }));
+    dispatch(
+      transitionPage({
+        index: currentPageIndex,
+        arr: selectPageList,
+        type: "prev",
+      })
+    );
   };
   const handleNext = () => {
-    // dispatch(transitionPage({ index: currentPageIndex, type: "next" }));
+    dispatch(
+      transitionPage({
+        index: currentPageIndex,
+        arr: selectPageList,
+        type: "next",
+      })
+    );
   };
 
   useEffect(() => {
