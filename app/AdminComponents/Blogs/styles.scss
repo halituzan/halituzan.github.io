@@ -10,7 +10,8 @@
         padding: 0 1rem;
         margin: 1.25rem 1rem 1.25rem 0.4rem;
 
-        li p {
+        li {
+            list-style: square;
             margin-top: 0.25em;
             margin-bottom: 0.25em;
         }
@@ -92,10 +93,30 @@
 
 .button-group {
     button {
-        margin: 0px 10px;
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #475569;
+        border-radius: 4px;
+
+    }
+
+    button:hover {
+        background-color: #475569;
+        color: white;
     }
 
     .isactive {
         font-weight: bold;
+        background-color: #475569;
+        color: white;
     }
+}
+
+/* Placeholder (at the top) */
+p.is-editor-empty:first-child::before {
+    color: var(--gray-4);
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
 }

@@ -9,19 +9,34 @@ const BlogsSchema = new Schema({
     type: String,
     required: [true, "Açıklamayı Girin"],
   },
+  summary: {
+    type: String,
+    required: [true, "Özet Girin"],
+  },
   author: {
     type: String,
   },
   date: {
     type: Date,
   },
-  like: {
-    type: Number,
-    default: 0,
+  updatedAt: {
+    type: Date,
   },
   tags: {
     type: Array,
     default: [],
+  },
+  wiew: {
+    type: Number,
+    default: 0,
+  },
+  like: {
+    type: Number,
+    default: 0,
+  },
+  share: {
+    type: Number,
+    default: 0,
   },
 });
 

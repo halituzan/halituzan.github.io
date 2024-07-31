@@ -42,7 +42,7 @@ const AdminLayout = ({ children }: Props) => {
         <div className='layou flex items-start bg-slate-100'>
           <Sidebar />
           <div className='flex-1 p-4 h-screen'>
-            <div className='w-full h-full bg-white rounded-lg p-4'>
+            <div className='w-full h-full bg-white rounded-lg p-4 overflow-y-auto'>
               {children}
             </div>
           </div>

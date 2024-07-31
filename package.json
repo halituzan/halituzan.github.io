@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
+    "@tiptap/extension-placeholder": "^2.5.8",
     "@tiptap/pm": "^2.5.5",
     "@tiptap/react": "^2.5.5",
     "@tiptap/starter-kit": "^2.5.5",
@@ -20,6 +21,7 @@
     "bcryptjs": "^2.4.3",
     "i18next": "^23.11.3",
     "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
     "mongoose": "^8.5.1",
     "next": "14.2.3",
     "next-i18next": "^15.3.0",
