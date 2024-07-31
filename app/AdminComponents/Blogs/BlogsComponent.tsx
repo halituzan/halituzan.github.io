@@ -51,12 +51,16 @@ const BlogsComponent = (props: Props) => {
 
                 <div className='ml-2'>
                   <strong>Yayın Tarih: </strong>
-                  <span>{moment(item.releaseDate).format("DD.MM.YYYY HH:mm")}</span>
+                  <span>
+                    {moment(item.releaseDate).format("DD.MM.YYYY HH:mm")}
+                  </span>
                 </div>
                 {item.releaseDate != item.updatedAt && (
                   <div className='ml-2'>
-                    <strong className="text-red-800">Güncelleme Tarih: </strong>
-                    <span>{moment(item.updatedAt).format("DD.MM.YYYY HH:mm")}</span>
+                    <strong className='text-red-800'>Güncelleme Tarih: </strong>
+                    <span>
+                      {moment(item.updatedAt).format("DD.MM.YYYY HH:mm")}
+                    </span>
                   </div>
                 )}
               </div>
@@ -109,9 +113,12 @@ const BlogsComponent = (props: Props) => {
             </div>
             <div className='mb-2 flex border-t'>
               <div className='flex m-2'>
-                {item.tags.map((i: string) => (
-                  <span className='mr-1 font-semibold text-orange-600 hover:text-orange-500 cursor-pointer text-sm'>
-                    #{i}
+                {item.tags.map((i: { name: string; id: string }) => (
+                  <span
+                    key={i.id}
+                    className='mr-1 font-semibold text-orange-600 hover:text-orange-500 cursor-pointer text-sm'
+                  >
+                    #{i.name}
                   </span>
                 ))}
               </div>

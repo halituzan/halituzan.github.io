@@ -8,6 +8,12 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default ({ setOpen }: any) => {
   const [hideContent, setHideContent] = useState(false);
+  const [values, setValues] = useState({
+    title: "",
+    content: "",
+    summary: "",
+    tags: [],
+  });
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -55,6 +61,16 @@ export default ({ setOpen }: any) => {
       >
         <MenuBar editor={editor} />
         <EditorContent editor={editor} />
+        <div className='w-full my-2 mt-4 relative'>
+          <textarea
+            id='summary'
+            className='p-2 border rounded-sm w-full'
+            placeholder='Özet'
+            value={values.summary}
+            onChange={(e) => setValues({ ...values, summary: e.target.value })}
+          ></textarea>
+          <div className="absolute -top-3 border border-y-0 right-4 bg-white px-2">{values.summary.length} / 140</div>
+        </div>
         <div className='w-full my-2'>
           <input
             type='text'
@@ -94,7 +110,7 @@ const MenuBar = ({ editor }: any) => {
 
   return (
     <div className='control-group bg-slate-50 mb-2'>
-      <div className='button-group'>
+      <div className='button-group flex items-center'>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "is-active" : ""}
@@ -179,7 +195,7 @@ const MenuBar = ({ editor }: any) => {
         >
           H6
         </button>
-        <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
+        {/* <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
           Clear marks
         </button>
         <button onClick={() => editor.chain().focus().clearNodes().run()}>
@@ -197,12 +213,12 @@ const MenuBar = ({ editor }: any) => {
           className={editor.isActive("bulletList") ? "is-active" : "is-active"}
         >
           Bullet list
-        </button>
+        </button> */}
         <button
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={editor.isActive("orderedList") ? "is-active" : ""}
         >
-          Ordered list
+          list
         </button>
         <button
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -216,19 +232,22 @@ const MenuBar = ({ editor }: any) => {
         >
           Blockquote
         </button>
-        <button
+        {/* <button
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
         >
           Horizontal rule
-        </button>
-        <button onClick={() => editor.chain().focus().setHardBreak().run()}>
+        </button> */}
+        {/* <button onClick={() => editor.chain().focus().setHardBreak().run()}>
           Hard break
-        </button>
+        </button> */}
         <button onClick={() => editor.chain().focus().undo().run()}>
-          Undo
+          <Icon icon={"ri:reply-line"} fontSize={20} />
         </button>
-        <button onClick={() => editor.chain().focus().redo().run()}>
-          Redo
+        <button
+          className='content-end'
+          onClick={() => editor.chain().focus().redo().run()}
+        >
+          <Icon icon={"ri:share-forward-line"} fontSize={20} />
         </button>
       </div>
     </div>
