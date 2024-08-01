@@ -22,7 +22,7 @@ const network = class NETWORK {
 
   constructor(axios: { create: (arg0: { baseURL: string }) => any }) {
     this.network = axios.create({
-      baseURL: "http://localhost:3000/api",
+      baseURL: "https://halituzan.github.io/api",
     });
   }
 
