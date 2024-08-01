@@ -10,13 +10,13 @@ const Home = (props: Props) => {
 
   return (
     <div className='w-full flex-1'>
-      {pages.map((item) => {
+      {/* {pages.map((item) => {
         return currentPage && item.key === currentPage.key ? (
           <div className="h-full" key={item.id}>{item.component}</div>
         ) : (
           ""
         );
-      })}
+      })} */}
       {!currentPage && <Welcome />}
     </div>
   );

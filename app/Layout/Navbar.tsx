@@ -18,8 +18,6 @@ const Navbar = (props: Props) => {
 
   const currentPage = selectPageList.find((i) => i.isOpen);
   const currentPageIndex = selectPageList.findIndex((i) => i.isOpen);
-  console.log(currentPageIndex);
-
   const [isSearch, setIsSearch] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);

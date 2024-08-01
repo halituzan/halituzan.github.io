@@ -11,6 +11,7 @@ interface SelectableItem {
   key: string;
   icon: string;
   isOpen: boolean;
+  url?: string;
 }
 interface PageListItem {
   id: number | string;
@@ -20,6 +21,7 @@ interface PageListItem {
   icon: string;
   isOpen: boolean;
   component?: React.ReactNode;
+  url?: string;
 }
 interface RouteProps {
   selectedPageList: SelectableItem[];

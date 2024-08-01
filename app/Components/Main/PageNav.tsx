@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@/app/Configs/ThemeContext";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/router";
 
 interface PageItem {
   icon: string;
@@ -15,10 +16,12 @@ interface PageItem {
   key: string;
   name: string;
   title: string;
+  url: string;
 }
 
 export default function PageNav(props: any) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { theme } = useTheme();
   const { t } = useTranslation("common");
   const selectPageList = useSelector(selectedPageList);
@@ -29,8 +32,6 @@ export default function PageNav(props: any) {
     arr: PageItem[],
     index: number
   ) => {
-    console.log("item", item);
-
     dispatch(
       setSelectedPagelist({
         type: "remove",
@@ -41,6 +42,7 @@ export default function PageNav(props: any) {
           key: item.key,
           name: item.name,
           title: item.title,
+          url: item.url,
         },
       })
     );
@@ -53,6 +55,7 @@ export default function PageNav(props: any) {
           key: item.key,
           name: item.name,
           title: item.title,
+          url: item.url,
         },
         isOpen: false,
       })
@@ -68,10 +71,16 @@ export default function PageNav(props: any) {
             key: arr[index - 1]?.key,
             name: arr[index - 1]?.name,
             title: arr[index - 1]?.title,
+            url: arr[index - 1]?.url,
           },
           isOpen: true,
         })
       );
+      if (arr[index - 1]?.url) {
+        router.push(arr[index - 1]?.url);
+      } else {
+        router.push("/");
+      }
     } else {
       dispatch(
         openCurrentPage({
@@ -82,10 +91,13 @@ export default function PageNav(props: any) {
             key: arr[index + 1]?.key,
             name: arr[index + 1]?.name,
             title: arr[index + 1]?.title,
+            url: arr[index + 1]?.url,
           },
           isOpen: true,
         })
       );
+
+      router.push(arr[index + 1]?.url);
     }
 
     if (arr.length === 0) {
@@ -98,10 +110,12 @@ export default function PageNav(props: any) {
             key: item.key,
             name: item.name,
             title: item.title,
+            url: item.url,
           },
           type: "closeAll",
         })
       );
+      router.push("/");
     }
   };
 
@@ -127,8 +141,11 @@ export default function PageNav(props: any) {
         return (
           <div
             key={item.id}
-            onMouseDown={(e) => handleMouseDown(e, item, arr as PageItem[], index)}
+            onMouseDown={(e) =>
+              handleMouseDown(e, item, arr as PageItem[], index)
+            }
             onClick={() => {
+              router.push(item.url);
               dispatch(
                 openCurrentPage({
                   item: {
@@ -138,6 +155,7 @@ export default function PageNav(props: any) {
                     key: item.key,
                     name: item.name,
                     title: item.title,
+                    url: item.url,
                   },
                   isOpen: true,
                 })

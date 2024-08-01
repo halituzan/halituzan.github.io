@@ -3,6 +3,7 @@ import About from "./About";
 import Portfolio from "./Portfolio";
 import Skills from "./Skills";
 import WorkHistory from "./WorkHistory";
+import Blog from "./Blog";
 interface PagesProps {
   id: number;
   title: string;
@@ -11,6 +12,7 @@ interface PagesProps {
   icon: string;
   isOpen: boolean;
   component?: React.ReactNode;
+  url?: string;
 }
 export const pages: PagesProps[] = [
   {
@@ -20,6 +22,7 @@ export const pages: PagesProps[] = [
     key: "about",
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
+    url: "/about",
     component: <About />,
   },
   {
@@ -29,6 +32,7 @@ export const pages: PagesProps[] = [
     key: "skills",
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
+    url: "/skills",
     component: <Skills />,
   },
   {
@@ -38,6 +42,7 @@ export const pages: PagesProps[] = [
     key: "works",
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
+    url: "/work-history",
     component: <WorkHistory />,
   },
   {
@@ -47,6 +52,17 @@ export const pages: PagesProps[] = [
     key: "portfolio",
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
+    url: "/portfolio",
     component: <Portfolio />,
   },
+  // {
+  //   id: 5,
+  //   title: "title.blog",
+  //   name: "name.blog",
+  //   key: "blog",
+  //   icon: "fluent:code-ts-16-filled",
+  //   isOpen: false,
+  //   url: "/blogs",
+  //   component: <></>,
+  // },
 ];

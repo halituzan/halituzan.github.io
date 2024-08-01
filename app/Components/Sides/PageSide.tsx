@@ -6,12 +6,14 @@ import {
   setSelectedPagelist,
 } from "@/lib/features/routes/routeSlice";
 import { Icon } from "@iconify/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 type Props = {};
 
 const PageSide = (props: Props) => {
+  const router = useRouter();
   const { t } = useTranslation("common");
   const [openPotfolio, setOpenPortfolio] = useState(false);
   const openPortfolioStorage = localStorage.getItem("openPortfolio");
@@ -32,6 +34,7 @@ const PageSide = (props: Props) => {
             key: data.key,
             name: data.name,
             title: data.title,
+            url: data.url,
           },
           isOpen: true,
         })
@@ -46,6 +49,7 @@ const PageSide = (props: Props) => {
             key: data.key,
             name: data.name,
             title: data.title,
+            url: data.url,
           },
           type: "closeAll",
         })
@@ -59,6 +63,7 @@ const PageSide = (props: Props) => {
             key: data.key,
             name: data.name,
             title: data.title,
+            url: data.url,
           },
           type: "add",
         })
@@ -72,6 +77,7 @@ const PageSide = (props: Props) => {
             key: data.key,
             name: data.name,
             title: data.title,
+            url: data.url,
           },
           isOpen: true,
         })
@@ -126,7 +132,12 @@ const PageSide = (props: Props) => {
             return (
               <div
                 key={item.id}
-                onClick={() => pageHandler(item)}
+                onClick={() => {
+                  pageHandler(item);
+                  if (item?.url) {
+                    router.push(item.url);
+                  }
+                }}
                 className={`flex items-center select-none pl-6 my-0.5 cursor-pointer ${
                   item.isOpen && theme === "dark"
                     ? "bg-dark5"

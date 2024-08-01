@@ -1,10 +1,13 @@
+"use client";
 import Placeholder from "@tiptap/extension-placeholder";
 import "./styles.scss";
 
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
+
+import Head from "next/head";
 
 export default ({ setOpen }: any) => {
   const [hideContent, setHideContent] = useState(false);
@@ -17,17 +20,9 @@ export default ({ setOpen }: any) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Placeholder.configure({
-        // Use a placeholder:
-        placeholder: "Write something …",
-        // Use different placeholders depending on the node type:
-        // placeholder: ({ node }) => {
-        //   if (node.type.name === 'heading') {
-        //     return 'What’s the title?'
-        //   }
 
-        //   return 'Can you add some further context?'
-        // },
+      Placeholder.configure({
+        placeholder: "Write something …",
       }),
     ],
     content: "",
@@ -41,65 +36,73 @@ export default ({ setOpen }: any) => {
   });
 
   return (
-    <div
-      className={`${hideContent ? "overflow-y-hidden" : "overflow-y-hidden"}`}
-    >
-      <div className='w-full my-2 z-50 block'>
-        <input
-          type='text'
-          id='title'
-          placeholder='Başlık'
-          className='p-2 border rounded-sm w-full'
-        />
-      </div>
+    <Fragment>
       <div
-        className={`transition-transform duration-500 ease-in-out ${
-          hideContent
-            ? "transform -translate-y-full opacity-0 h-0"
-            : "transform -translate-y-0 opacity-100 h-full"
-        }`}
+        className={`${hideContent ? "overflow-y-hidden" : "overflow-y-hidden"}`}
       >
-        <MenuBar editor={editor} />
-        <EditorContent editor={editor} />
-        <div className='w-full my-2 mt-4 relative'>
-          <textarea
-            id='summary'
-            className='p-2 border rounded-sm w-full'
-            placeholder='Özet'
-            value={values.summary}
-            onChange={(e) => setValues({ ...values, summary: e.target.value })}
-          ></textarea>
-          <div className="absolute -top-3 border border-y-0 right-4 bg-white px-2">{values.summary.length} / 140</div>
-        </div>
-        <div className='w-full my-2'>
+        <div className='w-full my-2 z-50 block'>
           <input
             type='text'
             id='title'
+            placeholder='Başlık'
             className='p-2 border rounded-sm w-full'
-            placeholder='type some ticket react, nextjs, javascript etc.'
           />
         </div>
-        <div className='w-full my-2 flex justify-end items-center'>
-          <button
-            className='p-2 bg-slate-500 rounded text-white mr-2'
-            onClick={() => setOpen(false)}
-          >
-            İptal
-          </button>
-          <button className='p-2 bg-blue-600 rounded text-white'>Kaydet</button>
+        <div
+          className={`transition-transform duration-500 ease-in-out ${
+            hideContent
+              ? "transform -translate-y-full opacity-0 h-0"
+              : "transform -translate-y-0 opacity-100 h-full"
+          }`}
+        >
+          <MenuBar editor={editor} />
+          <EditorContent editor={editor} />
+          <div className='w-full my-2 mt-4 relative'>
+            <textarea
+              id='summary'
+              className='p-2 border rounded-sm w-full'
+              placeholder='Özet'
+              value={values.summary}
+              onChange={(e) =>
+                setValues({ ...values, summary: e.target.value })
+              }
+            ></textarea>
+            <div className='absolute -top-3 border border-y-0 right-4 bg-white px-2'>
+              {values.summary.length} / 140
+            </div>
+          </div>
+          <div className='w-full my-2'>
+            <input
+              type='text'
+              id='title'
+              className='p-2 border rounded-sm w-full'
+              placeholder='type some ticket react, nextjs, javascript etc.'
+            />
+          </div>
+          <div className='w-full my-2 flex justify-end items-center'>
+            <button
+              className='p-2 bg-slate-500 rounded text-white mr-2'
+              onClick={() => setOpen(false)}
+            >
+              İptal
+            </button>
+            <button className='p-2 bg-blue-600 rounded text-white'>
+              Kaydet
+            </button>
+          </div>
+        </div>
+        <div className='mt-2 flex justify-center items-center py-2 w-full'>
+          <Icon
+            icon={
+              hideContent ? "ri:arrow-down-wide-fill" : "ri:arrow-up-wide-fill"
+            }
+            fontSize={64}
+            onClick={() => setHideContent(!hideContent)}
+            className='cursor-pointer text-slate-500 hover:text-slate-900 animate-bounce'
+          />
         </div>
       </div>
-      <div className='mt-2 flex justify-center items-center py-2 w-full'>
-        <Icon
-          icon={
-            hideContent ? "ri:arrow-down-wide-fill" : "ri:arrow-up-wide-fill"
-          }
-          fontSize={64}
-          onClick={() => setHideContent(!hideContent)}
-          className='cursor-pointer text-slate-500 hover:text-slate-900 animate-bounce'
-        />
-      </div>
-    </div>
+    </Fragment>
   );
 };
 
@@ -130,7 +133,16 @@ const MenuBar = ({ editor }: any) => {
           Strike
         </button>
         <button
-          onClick={() => editor.chain().focus().toggleCode().run()}
+          onClick={() =>
+            editor
+              .chain()
+              .focus()
+              .configure({
+                className: "js",
+              })
+              .toggleCode()
+              .run()
+          }
           className={editor.isActive("code") ? "is-active" : ""}
         >
           Code

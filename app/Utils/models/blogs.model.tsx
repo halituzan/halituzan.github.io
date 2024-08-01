@@ -1,9 +1,17 @@
 import mongoose from "mongoose";
+import shortid from "shortid";
 const Schema = mongoose.Schema;
 const BlogsSchema = new Schema({
   title: {
     type: String,
     required: [true, "Başlık Girin"],
+  },
+  code: {
+    type: String,
+    unique: true,
+    default: function () {
+      return `BP-${shortid.generate().slice(0, 6)}`;
+    },
   },
   content: {
     type: String,
@@ -16,7 +24,7 @@ const BlogsSchema = new Schema({
   author: {
     type: String,
   },
-  date: {
+  releaseDate: {
     type: Date,
   },
   updatedAt: {

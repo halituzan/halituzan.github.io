@@ -25,6 +25,8 @@ const Sidebar = (props: Props) => {
 
   const changeLanguage = (lng: string) => {
     window.localStorage.setItem("lng", lng);
+    document.documentElement.lang = lng;
+    setSelectedLang(lng);
     router.reload();
   };
   const changeMode = (m: string) => {

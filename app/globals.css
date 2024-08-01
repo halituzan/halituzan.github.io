@@ -2,7 +2,7 @@
 
 @tailwind components;
 @tailwind utilities;
-
+@import 'prismjs/themes/prism.css';
 html {
     font-family: var(--font-inter);
 }
@@ -52,3 +52,16 @@ body.light {
     border-radius: 14px;
     border: 3px solid var(--primary);
 }
+
+/* pre {
+    color: var(--tw-prose-pre-code);
+    background-color: #1f2937;
+    overflow-x: auto;
+    font-weight: 400;
+    font-size: .875em;
+    line-height: 1.7142857;
+    margin-top: 1.7142857em;
+    margin-bottom: 1.7142857em;
+    border-radius: .375rem;
+    padding: .8571429em 1.1428571em;
+} */
