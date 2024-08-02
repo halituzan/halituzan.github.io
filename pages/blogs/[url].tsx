@@ -1,6 +1,5 @@
 import SingleBlogPost from "@/app/Components/Main/Pages/BlogPost";
 import Network from "@/utils/Network";
-import React from "react";
 
 interface BlogPost {
   _id: number;
@@ -52,8 +51,6 @@ export async function getServerSideProps(context: any) {
       `/blogs/detail?code=${code}`,
       null
     );
-    console.log(res);
-
     return {
       props: {
         data: res.data || [],
