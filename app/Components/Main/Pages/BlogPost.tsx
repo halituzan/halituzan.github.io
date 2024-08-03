@@ -1,3 +1,4 @@
+"use client"
 import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import hljs from "highlight.js";

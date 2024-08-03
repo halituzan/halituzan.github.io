@@ -1,19 +1,18 @@
 "use client";
-import Placeholder from "@tiptap/extension-placeholder";
-import "./styles.scss";
-
+import { TagProps } from "@/app/Configs/types";
+import Network from "@/utils/Network";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Link from "@tiptap/extension-link";
+import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Fragment, useEffect, useState } from "react";
-import Network from "@/utils/Network";
-import { TagProps } from "@/app/Configs/types";
+import { Fragment, useCallback, useEffect, useState } from "react";
+import "./styles.scss";
 
 export default ({ setOpen }: any) => {
   const [hideContent, setHideContent] = useState(false);
   const [openTagList, setOpenTagList] = useState(false);
   const [tagList, setTagList] = useState<any>([]);
-  console.log("tagList", tagList);
 
   const [values, setValues] = useState<any>({
     title: "",
@@ -21,14 +20,17 @@ export default ({ setOpen }: any) => {
     summary: "",
     tags: [],
   });
-  console.log("values", values);
 
   const { title, content, summary, tags } = values;
 
   const editor = useEditor({
     extensions: [
       StarterKit,
-
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: "https",
+      }),
       Placeholder.configure({
         placeholder: "Write something …",
       }),
@@ -46,6 +48,28 @@ export default ({ setOpen }: any) => {
       setValues({ ...values, content: html });
     },
   });
+
+  const setLink = useCallback(() => {
+    const previousUrl = editor?.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
+    console.log("2");
+    if (url === null) {
+      return;
+    }
+    console.log("2");
+
+    if (url === "") {
+      editor?.chain().focus().extendMarkRange("link").unsetLink().run();
+
+      return;
+    }
+    editor
+      ?.chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: url })
+      .run();
+  }, [editor]);
 
   const getTags = async () => {
     try {
@@ -88,7 +112,7 @@ export default ({ setOpen }: any) => {
               : "transform -translate-y-0 opacity-100 h-full"
           }`}
         >
-          <MenuBar editor={editor} />
+          <MenuBar editor={editor} setLink={setLink} />
           <EditorContent editor={editor} />
           <div className='w-full my-2 mt-4 relative'>
             <textarea
@@ -197,7 +221,7 @@ export default ({ setOpen }: any) => {
   );
 };
 
-const MenuBar = ({ editor }: any) => {
+const MenuBar = ({ editor, setLink }: any) => {
   if (!editor) {
     return null;
   }
@@ -298,9 +322,13 @@ const MenuBar = ({ editor }: any) => {
         >
           H6
         </button>
-        {/* <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-          Clear marks
+        <button
+          onClick={setLink}
+          className={editor.isActive("link") ? "is-active" : ""}
+        >
+          Link
         </button>
+        {/*
         <button onClick={() => editor.chain().focus().clearNodes().run()}>
           Clear nodes
         </button>
