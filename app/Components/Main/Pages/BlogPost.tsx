@@ -31,7 +31,9 @@ const SingleBlogPost = ({ data, code }: Props) => {
   };
 
   useEffect(() => {
-    hljs.highlightAll();
+    if (data.content) {
+      hljs.highlightAll();
+    }
   }, [data.content]);
 
   return (
