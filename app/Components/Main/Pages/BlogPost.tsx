@@ -1,27 +1,27 @@
-import { BlogPost } from "@/app/Configs/types";
+import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import hljs from "highlight.js";
+import "highlight.js/styles/1c-light.css"; 
+// import "highlight.js/styles/github-dark.css";
 import moment from "moment";
-import Head from "next/head";
+import { Fragment, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
-import React, { Fragment } from "react";
 
 type Props = {
   data: BlogPost;
 };
 
 const SingleBlogPost = ({ data }: Props) => {
-  console.log(data);
+  const router = useRouter();
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [data.content]);
 
   return (
     <Fragment>
-      <Head>
-        <link
-          rel='stylesheet'
-          href='//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.2/build/styles/default.min.css'
-        ></link>
-      </Head>
       <section className='w-full p-5 h-[calc(100vh-107px)] overflow-auto'>
-        <h1 className='text-3xl font-semibold'>{data.title}</h1>
+        <h1 className='text-4xl my-0 font-semibold'>{data.title}</h1>
         <article className='my-6'>
           <div className='flex items-center py-1'>
             <div className='flex justify-start items-center mr-4'>
@@ -38,9 +38,10 @@ const SingleBlogPost = ({ data }: Props) => {
             </div>
             <div className='flex justify-start items-center mr-2'>
               <p className='text-sm flex items-center' role='author'>
-                {data.tags.map((i: { name: string; id: string }) => (
-                  <span
-                    key={i.id}
+                {data.tags.map((i: TagProps) => (
+                  <Link
+                    href={"/tags/" + i.url}
+                    key={i._id}
                     className='mr-1 font-semibold cursor-pointer text-sm hover:underline hover:text-orange-500 flex items-center'
                   >
                     <Icon
@@ -48,13 +49,13 @@ const SingleBlogPost = ({ data }: Props) => {
                       className='text-orange-500'
                     />
                     {i.name}
-                  </span>
+                  </Link>
                 ))}
               </p>
             </div>
           </div>
-          <div className='mt-2 text-sm font-medium'>
-            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+          <div className='mt-2 text-sm font-medium content-area'>
+            <div dangerouslySetInnerHTML={{ __html: data.content }} />
           </div>
         </article>
       </section>

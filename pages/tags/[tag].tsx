@@ -1,35 +1,31 @@
-import SingleBlogPost from "@/app/Components/Main/Pages/BlogPost";
+import Blog from "@/app/Components/Main/Pages/Blog";
 import { BlogPost } from "@/app/Configs/types";
 import Network from "@/utils/Network";
 
 type Props = {
-  data: BlogPost;
+  data: BlogPost[];
   errorMessage: boolean;
 };
 
-const BlogsPost = ({ data, errorMessage }: Props) => {
-  console.log(data);
-
-  return (
-    <div>
-      {errorMessage ? "Sayfaya Ulaşılamıyor" : <SingleBlogPost data={data} />}
-    </div>
-  );
+const TagsPage = ({ data, errorMessage }: Props) => {
+  return <Blog data={data} title='Tags Page' isTagPage={true} />;
 };
 
-export default BlogsPost;
+export default TagsPage;
 
 export async function getServerSideProps(context: any) {
-  const code = context.query.url.split("BP-")[1];
+  const { tag } = context.query;
 
-  if (!code) {
-    return;
+  if (!tag) {
+    return {
+      props: {},
+    };
   }
   try {
     const res = await Network.run(
       context,
       "GET",
-      `/blogs/detail?code=${code}`,
+      `/blogs/blogtags?tag=${tag}`,
       null
     );
     return {

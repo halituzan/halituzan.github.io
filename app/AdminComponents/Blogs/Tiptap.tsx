@@ -2,21 +2,29 @@
 import Placeholder from "@tiptap/extension-placeholder";
 import "./styles.scss";
 
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { Fragment, useState } from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
-
-import Head from "next/head";
+import { Fragment, useEffect, useState } from "react";
+import Network from "@/utils/Network";
+import { TagProps } from "@/app/Configs/types";
 
 export default ({ setOpen }: any) => {
   const [hideContent, setHideContent] = useState(false);
-  const [values, setValues] = useState({
+  const [openTagList, setOpenTagList] = useState(false);
+  const [tagList, setTagList] = useState<any>([]);
+  console.log("tagList", tagList);
+
+  const [values, setValues] = useState<any>({
     title: "",
     content: "",
     summary: "",
     tags: [],
   });
+  console.log("values", values);
+
+  const { title, content, summary, tags } = values;
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -33,8 +41,31 @@ export default ({ setOpen }: any) => {
         class: "min-h-[500px] bg-slate-100 border p-2 rounded",
       },
     },
+    onUpdate: ({ editor }) => {
+      const html = editor.getHTML();
+      setValues({ ...values, content: html });
+    },
   });
 
+  const getTags = async () => {
+    try {
+      const res = await Network.run(null, "GET", "/tags", null);
+      setTagList(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const createPost = async () => {
+    try {
+      const res = await Network.run(null, "POST", "/blogs/create", values);
+      console.log("res", res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getTags();
+  }, []);
   return (
     <Fragment>
       <div
@@ -44,6 +75,8 @@ export default ({ setOpen }: any) => {
           <input
             type='text'
             id='title'
+            value={title}
+            onChange={(e) => setValues({ ...values, title: e.target.value })}
             placeholder='Başlık'
             className='p-2 border rounded-sm w-full'
           />
@@ -62,22 +95,77 @@ export default ({ setOpen }: any) => {
               id='summary'
               className='p-2 border rounded-sm w-full'
               placeholder='Özet'
-              value={values.summary}
+              value={summary}
               onChange={(e) =>
                 setValues({ ...values, summary: e.target.value })
               }
             ></textarea>
-            <div className='absolute -top-3 border border-y-0 right-4 bg-white px-2'>
+            <div className='absolute -top-2 border border-y-0 right-4 bg-white px-2'>
               {values.summary.length} / 140
             </div>
           </div>
-          <div className='w-full my-2'>
-            <input
-              type='text'
-              id='title'
-              className='p-2 border rounded-sm w-full'
-              placeholder='type some ticket react, nextjs, javascript etc.'
-            />
+          <div
+            className='w-full my-2 relative z-50'
+            onMouseLeave={() => setOpenTagList(false)}
+          >
+            <div
+              id='tags'
+              onClick={() => setOpenTagList(true)}
+              className='p-2 border rounded-sm w-full h-11 flex items-center'
+            >
+              {tags.length > 0 ? (
+                tags.map((i: TagProps) => {
+                  return (
+                    <div
+                      key={i._id}
+                      className='mx-1 p-1 border rounded bg-slate-500 text-white flex items-center'
+                    >
+                      {i.name}
+                      <Icon
+                        icon={"oi:delete"}
+                        className='ml-1 cursor-pointer'
+                        onClick={() => {
+                          setTagList((prev: TagProps[]) => [
+                            ...prev,
+                            { _id: i._id, name: i.name, url: i.url },
+                          ]);
+                          setValues({
+                            ...values,
+                            tags: values.tags.filter(
+                              (item: TagProps) => item._id !== i._id
+                            ),
+                          });
+                        }}
+                      />
+                    </div>
+                  );
+                })
+              ) : (
+                <span className='text-gray-400 select-none'>
+                  type some ticket react, nextjs, javascript etc.
+                </span>
+              )}
+            </div>
+            {openTagList && (
+              <div className='absolute overflow-y-auto bottom-10 z-50 w-3/4 rounded flex flex-col max-h-[200px] bg-white shadow-md border'>
+                {tagList.map((i: TagProps) => (
+                  <span
+                    className='p-2 z-50 cursor-pointer hover:bg-slate-300'
+                    onClick={() => {
+                      setValues({
+                        ...values,
+                        tags: [...tags, { _id: i._id, name: i.name }],
+                      });
+                      setTagList(
+                        tagList.filter((item: TagProps) => item._id !== i._id)
+                      );
+                    }}
+                  >
+                    {i.name}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
           <div className='w-full my-2 flex justify-end items-center'>
             <button
@@ -86,21 +174,24 @@ export default ({ setOpen }: any) => {
             >
               İptal
             </button>
-            <button className='p-2 bg-blue-600 rounded text-white'>
+            <button
+              className='p-2 bg-blue-600 rounded text-white'
+              onClick={createPost}
+            >
               Kaydet
             </button>
           </div>
         </div>
-        <div className='mt-2 flex justify-center items-center py-2 w-full'>
+        {/* <div className='mt-2 flex justify-center items-center z-0 py-2 w-full'>
           <Icon
             icon={
               hideContent ? "ri:arrow-down-wide-fill" : "ri:arrow-up-wide-fill"
             }
             fontSize={64}
             onClick={() => setHideContent(!hideContent)}
-            className='cursor-pointer text-slate-500 hover:text-slate-900 animate-bounce'
+            className='cursor-pointer z-0 text-slate-500 hover:text-slate-900 animate-bounce'
           />
-        </div>
+        </div> */}
       </div>
     </Fragment>
   );

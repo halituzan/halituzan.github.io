@@ -6,6 +6,10 @@ const BlogsSchema = new Schema({
     type: String,
     required: [true, "Başlık Girin"],
   },
+  url: {
+    type: String,
+    required: [true, "URL Girin"],
+  },
   code: {
     type: String,
     unique: true,
@@ -26,12 +30,14 @@ const BlogsSchema = new Schema({
   },
   releaseDate: {
     type: Date,
+    default: new Date(),
   },
   updatedAt: {
     type: Date,
+    default: new Date(),
   },
   tags: {
-    type: Array,
+    type: [Object],
     default: [],
   },
   wiew: {

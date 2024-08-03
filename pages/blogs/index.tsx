@@ -1,32 +1,14 @@
 import Blog from "@/app/Components/Main/Pages/Blog";
+import { BlogPost } from "@/app/Configs/types";
 import Network from "@/utils/Network";
 import React from "react";
-interface BlogPost {
-  _id: number;
-  title: string;
-  content: string;
-  url: string;
-  code: string;
-  summary: string;
-  author: string;
-  releaseDate: string;
-  updatedAt: string;
-  tags: [
-    {
-      name: string;
-      id: "string";
-    }
-  ];
-  like: number;
-  view: number;
-  share: number;
-}
+
 type Props = {
   data: BlogPost[];
 };
 
 const BlogsPage = ({ data }: Props) => {
-  return <Blog data={data} />;
+  return <Blog data={data} title='Blog Post' isTagPage={false} />;
 };
 
 export default BlogsPage;

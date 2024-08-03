@@ -1,20 +1,46 @@
-import { useTheme } from "@/app/Configs/ThemeContext";
-import { BlogPost } from "@/app/Configs/types";
-import Network from "@/app/Utils/Network";
+import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import moment from "moment";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 type Props = {
   data: BlogPost[];
+  title: string;
+  isTagPage: boolean;
 };
 
-const Blog = ({ data }: Props) => {
-  const { theme } = useTheme();
+const Blog = ({ data, title, isTagPage }: Props) => {
+  const router = useRouter();
+
+  const { tag } = router.query;
+
   return (
     <section className='w-full p-5 h-[calc(100vh-107px)] overflow-auto'>
-      <h1 className='text-3xl font-semibold w-full pb-1'>Blog Posts</h1>
+      <h1 className='text-3xl font-semibold w-full pb-1'>{title}</h1>
+      {isTagPage && (
+        <div>
+          <Link
+            href={"/blogs"}
+            className='flex items-center cursor-pointer w-[100px] mb-5'
+          >
+            <Icon
+              icon='solar:map-arrow-left-bold-duotone'
+              className='text-orange-500'
+              fontSize={28}
+            />
+            <span className='text-lg font-bod ml-1 font-bold hover:text-orange-600 hover:underline '>
+              Tümü
+            </span>
+          </Link>
+          <div>
+            <span className='font-bold'>{tag}</span> etiketi ile{" "}
+            <span className='font-bold'>({data.length})</span> adet içerik
+            bulundu
+          </div>
+        </div>
+      )}
+
       {data.map((item) => {
         return (
           <article key={item._id} className='my-6'>
@@ -43,18 +69,21 @@ const Blog = ({ data }: Props) => {
               </div>
               <div className='flex justify-start items-center mr-2'>
                 <p className='text-sm flex items-center' role='author'>
-                  {item.tags.map((i: { name: string; id: string }) => (
-                    <span
-                      key={i.id}
-                      className='mr-1 font-semibold cursor-pointer text-sm hover:underline hover:text-orange-500 flex items-center'
-                    >
-                      <Icon
-                        icon={"line-md:hash-small"}
-                        className='text-orange-500'
-                      />
-                      {i.name}
-                    </span>
-                  ))}
+                  {item.tags.map((i: TagProps) => {
+                    return (
+                      <Link
+                        href={"/tags/" + i.url}
+                        key={i._id}
+                        className='mr-1 font-semibold cursor-pointer text-sm hover:underline hover:text-orange-500 flex items-center'
+                      >
+                        <Icon
+                          icon={"line-md:hash-small"}
+                          className='text-orange-500'
+                        />
+                        {i.name}
+                      </Link>
+                    );
+                  })}
                 </p>
               </div>
             </div>

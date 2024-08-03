@@ -6,6 +6,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      container: {
+        center: true,
+      },
       colors: {
         dark1: "#020617", // slate-950
         dark2: "#0f172a", // slate-900
@@ -20,6 +23,7 @@ const config: Config = {
         light5: "#f8fafc", // slate-50
         light6: "#ffffff", // white
       },
+
       keyframes: {
         wiggle: {
           "0%, 100%": { transform: "rotate(-15deg)" },

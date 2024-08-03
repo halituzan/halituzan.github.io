@@ -7,6 +7,9 @@ const TagsSchema = new Schema({
   count: {
     type: Number,
   },
+  url: {
+    type: String,
+  },
 });
 
 const Tags = mongoose.models?.Tags || mongoose.model("Tags", TagsSchema);

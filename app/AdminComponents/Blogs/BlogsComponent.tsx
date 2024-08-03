@@ -3,7 +3,6 @@ import Network from "@/app/Utils/Network";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import moment from "moment";
 import dynamic from "next/dynamic";
-import Head from "next/head";
 const Tiptap = dynamic(() => import("./Tiptap"), { ssr: false });
 type Props = {};
 
@@ -26,7 +25,9 @@ const BlogsComponent = (props: Props) => {
     <Fragment>
       <div>
         {openAddBlogPost ? (
-          <Tiptap setOpen={setOpenAddBlogPost} />
+          <div className='pb-12 '>
+            <Tiptap setOpen={setOpenAddBlogPost} />
+          </div>
         ) : (
           <div className='p-4 flex justify-end'>
             <button
@@ -41,7 +42,7 @@ const BlogsComponent = (props: Props) => {
           return (
             <div
               key={item?._id}
-              className='bg-slate-50 hover:bg-slate-100  rounded-md mb-2'
+              className='bg-slate-50 hover:bg-slate-100 rounded-md mb-2'
             >
               <h4 className='text-2xl font-semibold p-2'>{item.title}</h4>
               <div className='flex justify-between items-center my-2 border-b border-t text-sm bg-slate-100'>

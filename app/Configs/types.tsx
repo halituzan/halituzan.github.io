@@ -8,13 +8,14 @@ export interface BlogPost {
   author: string;
   releaseDate: string;
   updatedAt: string;
-  tags: [
-    {
-      name: string;
-      id: "string";
-    }
-  ];
+  tags: TagProps[];
   like: number;
   view: number;
   share: number;
+}
+
+export interface TagProps {
+  name: string;
+  _id: string;
+  url: string;
 }
