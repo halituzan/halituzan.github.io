@@ -2,7 +2,7 @@
 import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import hljs from "highlight.js";
-import "highlight.js/styles/1c-light.css";
+import "highlight.js/styles/a11y-light.min.css";
 // import "highlight.js/styles/github-dark.css";
 import Network from "@/utils/Network";
 import moment from "moment";
@@ -15,8 +15,6 @@ type Props = {
 };
 
 const SingleBlogPost = ({ data, code }: Props) => {
-  console.log("code", code);
-
   const [like, setLike] = useState(data.like);
   const getCount = async (endpoint: string) => {
     try {
@@ -81,7 +79,9 @@ const SingleBlogPost = ({ data, code }: Props) => {
         onClick={() => getCount("like")}
         className='fixed bottom-10 right-10 cursor-pointer hover:shadow flex items-center border p-2 rounded-full'
       >
-        <span className='text-lg font-semibold min-w-[40px] text-end select-none'>{like}</span>
+        <span className='text-lg font-semibold min-w-[40px] text-end select-none'>
+          {like}
+        </span>
         <Icon
           icon='ph:hands-clapping-fill'
           className='hover:text-orange-600 select-none'

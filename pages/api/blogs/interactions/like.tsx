@@ -6,14 +6,12 @@ connectDBV2();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const blogs = await Blogs.findOneAndUpdate(
+    await Blogs.findOneAndUpdate(
       {
         code: "BP-" + req.query.code,
       },
-      { $inc: { like: 1 } }, // 'like' değerini bir artır
-      { new: true } // Güncellenmiş belgeyi döndür
+      { $inc: { like: 1 } }
     );
-    console.log("blogs", "BP-" + req.query.code);
 
     return res.status(200).json({
       message: "Beğenme işlemi gerçekleşti",
