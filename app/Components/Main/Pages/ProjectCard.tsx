@@ -12,7 +12,7 @@ function ProjectCard({ item }: Props) {
   const { t } = useTranslation("works");
   return (
     <div>
-      <h3 className='mt-4 text-xl'>{t("text.projects")}</h3>
+      <h3 className='mt-4 text-xl my-0'>{t("text.projects")}</h3>
       <div className='grid grid-cols-12 gap-4 mt-2'>
         {item.project.map((itm: any) => {
           return (
@@ -28,7 +28,7 @@ function ProjectCard({ item }: Props) {
                 className='rounded-t-xl w-full'
               />
               <h4
-                className={`text-center text-xl font-semibold border-b ${
+                className={`text-center text-xl font-semibold border-b my-0 ${
                   theme === "dark" ? "bg-dark6" : "bg-light6 "
                 }`}
               >

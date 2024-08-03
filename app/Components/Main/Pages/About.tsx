@@ -5,9 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 const { highlightList } = Config;
-type Props = {};
+type Props = {
+  data: any;
+};
 
-const About = (props: Props) => {
+const About = ({ data }: Props) => {
+  console.log(data);
   const { t } = useTranslation("profile");
   const { theme } = useTheme();
   const getHighlightedText = (text: string, highlights: string[]) => {
@@ -57,41 +60,41 @@ const About = (props: Props) => {
               theme === "dark" ? "text-light2" : "text-dark1"
             }`}
           >
-            {Config.information.title}
+            {data?.information.title}
           </p>
           <div className='grid grid-cols-6 w-full'>
             <InfoRow
               theme={theme}
               field={t("name")}
-              title={Config.information.name}
+              title={data?.information.name}
             />
             <InfoRow
               theme={theme}
               field={t("email")}
-              title={Config.information.email}
-              url={`mailto:${Config.information.email}`}
+              title={data?.information.email}
+              url={`mailto:${data?.information.email}`}
             />
             <InfoRow
               theme={theme}
               field={t("phone")}
-              title={Config.information.phone}
-              url={`tel:${Config.information.phone}`}
+              title={data?.information.phone}
+              url={`tel:${data?.information.phone}`}
             />
             <InfoRow
               theme={theme}
               field={t("location")}
-              title={Config.information.city + "/" + Config.information.country}
+              title={data?.information.city + "/" + data?.information.country}
             />
             <InfoRow
               theme={theme}
               field={t("degree")}
-              title={Config.information.degree}
+              title={data?.information.degree}
             />
             {/* <InfoRow
               theme={theme}
               field={t("freelance")}
               title={
-                Config.information.freelance
+                data?.information.freelance
                   ? t("yes.freelance")
                   : t("no.freelance")
               }
@@ -100,12 +103,12 @@ const About = (props: Props) => {
               theme={theme}
               field={t("remote")}
               title={
-                Config.information.remote ? t("yes.remote") : t("no.remote")
+                data?.information.remote ? t("yes.remote") : t("no.remote")
               }
             /> */}
           </div>
           <div className='flex justify-center w-full items-end flex-1'>
-            {Config.social.map((item) => {
+            {data?.social.map((item: any) => {
               return (
                 <Link key={item.id} href={item.url} target='_blank'>
                   <Icon

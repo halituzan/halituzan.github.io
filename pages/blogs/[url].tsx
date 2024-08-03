@@ -11,7 +11,7 @@ const BlogsPost = ({ data, errorMessage }: Props) => {
   console.log(data);
 
   return (
-    <div>
+    <div className="w-full">
       {errorMessage ? "Sayfaya Ulaşılamıyor" : <SingleBlogPost data={data} />}
     </div>
   );

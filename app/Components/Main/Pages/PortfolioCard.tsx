@@ -56,7 +56,7 @@ function PortfolioCard({ item }: Props) {
           )}
         </div>
         <h4
-          className={`text-center flex justify-center items-center flex-1 text-xl font-bold ${
+          className={`text-center flex justify-center items-center flex-1 text-xl font-bold my-0 ${
             theme === "dark" ? "" : ""
           }`}
         >

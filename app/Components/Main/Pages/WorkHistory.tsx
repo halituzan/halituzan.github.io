@@ -21,7 +21,7 @@ function WorkHistory({}: Props) {
       {workHistories.map((item) => {
         return (
           <div key={item.id} className='w-full p-4'>
-            <h3 className='text-xl pb-1 w-full'>{item.job}</h3>
+            <h3 className='text-xl pb-1 w-full my-0'>{item.job}</h3>
             <div className='flex text-slate-500 items-center'>
               <Link
                 href={item.url}

@@ -20,7 +20,7 @@ const SingleBlogPost = ({ data }: Props) => {
   }, [data.content]);
 
   return (
-    <Fragment>
+    <div className="w-full">
       <section className='w-full p-5 h-[calc(100vh-107px)] overflow-auto'>
         <h1 className='text-4xl my-0 font-semibold'>{data.title}</h1>
         <article className='my-6'>
@@ -60,7 +60,7 @@ const SingleBlogPost = ({ data }: Props) => {
           </div>
         </article>
       </section>
-    </Fragment>
+    </div>
   );
 };
 
