@@ -24,7 +24,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({
       data: icons.map((item) => {
-        return { id: item.id, name: item.name, icon: item.icon };
+        return { id: item.id, name: item.name, icon: item.icon, url: item.url };
       }),
       status: true,
     });

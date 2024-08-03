@@ -77,13 +77,8 @@ const AboutPage = (props: Props) => {
     console.log(value);
 
     const filteredSocial = social.filter((_, ind) => ind !== index);
-    let currentSocial = social.find((_, ind) => ind == index) ?? { url: "" };
-    console.log("currentSocial", currentSocial);
 
-    if (currentSocial) {
-      currentSocial = { ...currentSocial, ...value };
-      setValues({ ...values, social: [...filteredSocial, currentSocial] });
-    }
+    setValues({ ...values, social: [...filteredSocial, value] });
   };
 
   const saveAbout = async () => {

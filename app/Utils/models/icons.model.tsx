@@ -10,6 +10,9 @@ const IconsSchema = new Schema({
   id: {
     type: String,
   },
+  url: {
+    type: String,
+  },
 });
 
 const Icons = mongoose.models?.Icons || mongoose.model("Icons", IconsSchema);
