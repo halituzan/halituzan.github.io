@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import shortid from "shortid";
 const Schema = mongoose.Schema;
 const BlogsSchema = new Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   title: {
     type: String,
     required: [true, "Başlık Girin"],

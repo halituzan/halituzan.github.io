@@ -1,20 +1,30 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const AboutSchema = new Schema({
+  user: { type: String },
   title: {
     type: String,
+    default: "",
+  },
+  description: {
+    type: String,
+    default: "",
   },
   firstName: {
     type: String,
+    default: "",
   },
   lastName: {
     type: String,
+    default: "",
   },
   email: {
     type: String,
+    default: "",
   },
   phone: {
     type: String,
+    default: "",
   },
   location: {
     type: Object,
@@ -25,6 +35,7 @@ const AboutSchema = new Schema({
   },
   degree: {
     type: String,
+    default: "",
   },
   social: {
     type: Array,
