@@ -5,12 +5,17 @@ import Network from "@/utils/Network";
 type Props = {
   data: BlogPost;
   errorMessage: boolean;
+  code: string;
 };
 
-const BlogsPost = ({ data, errorMessage }: Props) => {
+const BlogsPost = ({ data, errorMessage, code }: Props) => {
   return (
     <div className='w-full'>
-      {errorMessage ? "Sayfaya Ulaşılamıyor" : <SingleBlogPost data={data} />}
+      {errorMessage ? (
+        "Sayfaya Ulaşılamıyor"
+      ) : (
+        <SingleBlogPost data={data} code={code} />
+      )}
     </div>
   );
 };
@@ -34,6 +39,7 @@ export async function getServerSideProps(context: any) {
       props: {
         data: res.data || [],
         errorMessage: res.data == null ? true : false,
+        code: code,
       },
     };
   } catch (error) {
@@ -41,6 +47,7 @@ export async function getServerSideProps(context: any) {
       props: {
         data: [],
         errorMessage: true,
+        code: code,
       },
     };
   }

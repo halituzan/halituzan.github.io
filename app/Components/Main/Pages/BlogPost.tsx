@@ -1,26 +1,43 @@
-"use client"
+"use client";
 import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import hljs from "highlight.js";
-import "highlight.js/styles/1c-light.css"; 
+import "highlight.js/styles/1c-light.css";
 // import "highlight.js/styles/github-dark.css";
+import Network from "@/utils/Network";
 import moment from "moment";
-import { Fragment, useEffect } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 type Props = {
   data: BlogPost;
+  code: string;
 };
 
-const SingleBlogPost = ({ data }: Props) => {
-  const router = useRouter();
+const SingleBlogPost = ({ data, code }: Props) => {
+  console.log("code", code);
+
+  const [like, setLike] = useState(data.like);
+  const getCount = async (endpoint: string) => {
+    try {
+      await Network.run(
+        null,
+        "GET",
+        "/blogs/interactions/" + endpoint + "?code=" + code,
+        null
+      );
+      setLike((prev) => prev + 1);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     hljs.highlightAll();
   }, [data.content]);
 
   return (
-    <div className="w-full">
+    <div className='w-full relative'>
       <section className='w-full p-5 h-[calc(100vh-107px)] overflow-auto'>
         <h1 className='text-4xl my-0 font-semibold'>{data.title}</h1>
         <article className='my-6'>
@@ -60,6 +77,17 @@ const SingleBlogPost = ({ data }: Props) => {
           </div>
         </article>
       </section>
+      <div
+        onClick={() => getCount("like")}
+        className='fixed bottom-10 right-10 cursor-pointer hover:shadow flex items-center border p-2 rounded-full'
+      >
+        <span className='text-lg font-semibold min-w-[40px] text-end select-none'>{like}</span>
+        <Icon
+          icon='ph:hands-clapping-fill'
+          className='hover:text-orange-600 select-none'
+          fontSize={36}
+        />
+      </div>
     </div>
   );
 };

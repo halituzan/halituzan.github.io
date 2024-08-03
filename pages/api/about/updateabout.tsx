@@ -32,7 +32,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (method === "PATCH") {
-      const newAbout = await Abouts.findByIdAndUpdate({ _id: user._id });
+      const newAbout = await Abouts.findOneAndUpdate(
+        { user: user._id },
+        data,
+        { new: true }
+      );
       res.status(200).json({
         message: "Hakkımda verisi güncellendi.",
         status: true,

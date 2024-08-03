@@ -10,7 +10,7 @@ type Props = {};
 const AboutPage = (props: Props) => {
   const userId = process.env.NEXT_PUBLIC_USER_ID;
   const [dataOk, setDataOk] = useState(true);
-  const [openIconList, setOpenIconList] = useState(true);
+  const [openIconList, setOpenIconList] = useState(false);
   const [iconList, setIconList] = useState([]);
   const [values, setValues] = useState({
     user: "",

@@ -1,45 +1,15 @@
-import Config from "@/app/Configs/config";
 import { useTheme } from "@/app/Configs/ThemeContext";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-const { highlightList } = Config;
 type Props = {
   data: any;
 };
 
 const About = ({ data }: Props) => {
-  console.log(data);
   const { t } = useTranslation("profile");
   const { theme } = useTheme();
-  const getHighlightedText = (text: string, highlights: string[]) => {
-    // Split the text into sentences while keeping the period at the end
-    const sentences = text.split(/(?<=\.)/);
-
-    return sentences.map((sentence, index) => {
-      // Split the sentence into words and spaces while keeping the spaces
-      const words = sentence.split(/(\s+)/);
-
-      // Map through each word and bold the highlights
-      const highlightedSentence = words.map((word, wordIndex) => {
-        const cleanWord = word.replace(/[.,]/g, "").toLowerCase(); // Remove punctuation for comparison
-        return highlights.includes(cleanWord) ? (
-          <strong key={wordIndex}>{word}</strong>
-        ) : (
-          word
-        );
-      });
-
-      return (
-        <div key={index} className='flex items-start mb-2'>
-          <p>{highlightedSentence}</p>
-        </div>
-      );
-    });
-  };
-
-  const description = t("description");
   return (
     <div
       className={`flex-1 flex flex-col md:flex-row items-start justify-between md:gap-5 w-full h-full overflow-y-auto ${
@@ -60,41 +30,37 @@ const About = ({ data }: Props) => {
               theme === "dark" ? "text-light2" : "text-dark1"
             }`}
           >
-            {data?.information.title}
+            {data?.title}
           </p>
           <div className='grid grid-cols-6 w-full'>
             <InfoRow
               theme={theme}
               field={t("name")}
-              title={data?.information.name}
+              title={data?.firstName + " " + data?.lastName}
             />
             <InfoRow
               theme={theme}
               field={t("email")}
-              title={data?.information.email}
-              url={`mailto:${data?.information.email}`}
+              title={data?.email}
+              url={`mailto:${data?.email}`}
             />
             <InfoRow
               theme={theme}
               field={t("phone")}
-              title={data?.information.phone}
-              url={`tel:${data?.information.phone}`}
+              title={data?.phone}
+              url={`tel:${data?.phone}`}
             />
             <InfoRow
               theme={theme}
               field={t("location")}
-              title={data?.information.city + "/" + data?.information.country}
+              title={data?.location.city + " / " + data?.location.country}
             />
-            <InfoRow
-              theme={theme}
-              field={t("degree")}
-              title={data?.information.degree}
-            />
+            <InfoRow theme={theme} field={t("degree")} title={data?.degree} />
             {/* <InfoRow
               theme={theme}
               field={t("freelance")}
               title={
-                data?.information.freelance
+                data?.freelance
                   ? t("yes.freelance")
                   : t("no.freelance")
               }
@@ -103,14 +69,19 @@ const About = ({ data }: Props) => {
               theme={theme}
               field={t("remote")}
               title={
-                data?.information.remote ? t("yes.remote") : t("no.remote")
+                data?.remote ? t("yes.remote") : t("no.remote")
               }
             /> */}
           </div>
           <div className='flex justify-center w-full items-end flex-1'>
             {data?.social.map((item: any) => {
               return (
-                <Link key={item.id} href={item.url} target='_blank'>
+                <Link
+                  key={item.id}
+                  href={item.url}
+                  target='_blank'
+                  className='mx-1'
+                >
                   <Icon
                     icon={item.icon}
                     fontSize={"2rem"}
@@ -128,7 +99,7 @@ const About = ({ data }: Props) => {
           theme == "dark" ? "bg-dark5 text-light2" : "bg-light4 text-dark1"
         }`}
       >
-        {getHighlightedText(description, highlightList)}
+        <div dangerouslySetInnerHTML={{ __html: data.description }} />
       </div>
     </div>
   );
