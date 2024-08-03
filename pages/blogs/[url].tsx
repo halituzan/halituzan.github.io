@@ -26,7 +26,13 @@ export async function getServerSideProps(context: any) {
   const code = context.query.url.split("BP-")[1];
 
   if (!code) {
-    return;
+    return {
+      props: {
+        data: [],
+        errorMessage: true,
+        code: code,
+      },
+    };
   }
   try {
     const res = await Network.run(
