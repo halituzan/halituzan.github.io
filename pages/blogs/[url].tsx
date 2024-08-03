@@ -8,10 +8,8 @@ type Props = {
 };
 
 const BlogsPost = ({ data, errorMessage }: Props) => {
-  console.log(data);
-
   return (
-    <div className="w-full">
+    <div className='w-full'>
       {errorMessage ? "Sayfaya Ulaşılamıyor" : <SingleBlogPost data={data} />}
     </div>
   );

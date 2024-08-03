@@ -1,9 +1,4 @@
 import React from "react";
-import About from "./About";
-import Portfolio from "./Portfolio";
-import Skills from "./Skills";
-import WorkHistory from "./WorkHistory";
-import Blog from "./Blog";
 interface PagesProps {
   id: number;
   title: string;
@@ -23,7 +18,6 @@ export const pages: PagesProps[] = [
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
     url: "/about",
-    component: <About />,
   },
   {
     id: 2,
@@ -33,7 +27,6 @@ export const pages: PagesProps[] = [
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
     url: "/skills",
-    component: <Skills />,
   },
   {
     id: 3,
@@ -43,7 +36,6 @@ export const pages: PagesProps[] = [
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
     url: "/work-history",
-    component: <WorkHistory />,
   },
   {
     id: 4,
@@ -53,7 +45,6 @@ export const pages: PagesProps[] = [
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
     url: "/portfolio",
-    component: <Portfolio />,
   },
   {
     id: 5,
@@ -63,6 +54,5 @@ export const pages: PagesProps[] = [
     icon: "fluent:code-ts-16-filled",
     isOpen: false,
     url: "/blogs",
-    component: <></>,
   },
 ];

@@ -8,6 +8,10 @@ import { Fragment, useCallback } from "react";
 import "./styles.scss";
 
 export default ({ description, changeHandler }: any) => {
+  if (!description) {
+    return;
+  }
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -37,15 +41,11 @@ export default ({ description, changeHandler }: any) => {
   const setLink = useCallback(() => {
     const previousUrl = editor?.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
-    console.log("2");
     if (url === null) {
       return;
     }
-    console.log("2");
-
     if (url === "") {
       editor?.chain().focus().extendMarkRange("link").unsetLink().run();
-
       return;
     }
     editor

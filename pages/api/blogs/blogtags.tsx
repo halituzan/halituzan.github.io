@@ -6,8 +6,6 @@ connectDBV2();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { tag } = req.query;
-  console.log("tag", tag);
-  console.log("tagasdasdasd");
 
   if (!tag) {
     return res.status(400).json({ message: "Tag is required" });
@@ -15,7 +13,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const blogs = await Blogs.find({ "tags.url": tag });
-    console.log("blogs", blogs);
 
     return res.status(200).json({
       data: blogs,

@@ -8,14 +8,13 @@ connectDBV2();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data, method } = req.body;
   const token = req.cookies.token;
-  console.log("1");
 
   if (!token) {
     return;
   }
-  console.log("2");
+
   const userId = errorHandle(token || "", req, res, method);
-  console.log("3");
+
   try {
     const user = await User.findOne({ _id: userId });
     if (!user) {
@@ -24,7 +23,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         .json({ message: "Böyle Bir Kullanıcı Bulunamıyor" });
     }
     if (method === "POST") {
-      console.log("4");
       const newAbout = new Abouts({ ...data, userId: user._id });
       await newAbout.save();
       res.status(201).json({

@@ -7,14 +7,12 @@ connectDBV2();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const userId = req.query.id;
-  console.log("userId", userId);
 
   if (!userId) {
     return;
   }
   try {
     const about = await Abouts.findOne({ user: userId });
-    console.log("about", about);
 
     if (!about) {
       return res

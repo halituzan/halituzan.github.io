@@ -43,12 +43,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const currentTitle = title.toLowerCase();
-    console.log("---------------",
-      currentTitle.replaceAll(
-        /[,!?*ışçöüğİŞÇÖÜĞ .]/g,
-        (change: any): string => letters[change as LetterKeys]
-      )
-    );
 
     const newBlog = new Blogs({
       title,
