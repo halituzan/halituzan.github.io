@@ -122,6 +122,11 @@ body.light {
     border: 3px solid var(--primary);
 }
 
+pre {
+    margin: 10px 0px;
+
+}
+
 /* pre {
     max-width: 768px;
     color: var(--tw-prose-pre-code);

@@ -1,6 +1,6 @@
 import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import hljs from "highlight.js";
+// import hljs from "highlight.js";
 // import hljs from "highlight.js/lib/core";
 // import "highlight.js/styles/github-dark.css";
 import Network from "@/utils/Network";
@@ -33,17 +33,17 @@ const SingleBlogPost = ({ data, code }: Props) => {
     }
   };
 
-  if (!hljs) {
-    console.log("hljs");
+  // if (!hljs) {
+  //   console.log("hljs");
 
-    return;
-  }
+  //   return;
+  // }
 
-  useEffect(() => {
-    if (data.content) {
-      hljs.highlightAll();
-    }
-  }, [data.content]);
+  // useEffect(() => {
+  //   if (data.content) {
+  //     hljs.highlightAll();
+  //   }
+  // }, [data.content]);
 
   return (
     <div className='w-full relative'>
