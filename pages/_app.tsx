@@ -13,6 +13,7 @@ import { ThemeProvider } from "@/app/Configs/ThemeContext";
 import { poppins } from "@/app/Assets/Fonts/localFonts.helper";
 import "@/app/Assets/resizable.css";
 import "@/app/globals.css";
+import "highlight.js/styles/a11y-light.min.css";
 //* Component Imports
 import Layout from "@/app/Layout";
 import store from "@/lib/store";

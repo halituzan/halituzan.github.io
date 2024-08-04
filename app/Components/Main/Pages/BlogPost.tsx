@@ -1,8 +1,7 @@
-"use client";
 import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import hljs from "highlight.js";
-import "highlight.js/styles/a11y-light.min.css";
+
 // import "highlight.js/styles/github-dark.css";
 import Network from "@/utils/Network";
 import moment from "moment";
@@ -29,6 +28,11 @@ const SingleBlogPost = ({ data, code }: Props) => {
       console.log(error);
     }
   };
+  if (!hljs) {
+    console.log("hljs");
+
+    return;
+  }
 
   useEffect(() => {
     if (data.content) {
