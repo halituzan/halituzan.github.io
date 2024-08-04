@@ -88,14 +88,14 @@ const SingleBlogPost = ({ data, code }: Props) => {
       </section>
       <div
         onClick={() => getCount("like")}
-        className={`fixed bottom-10 right-10 cursor-pointer hover:shadow flex items-center border p-2 rounded-full ${theme == "dark" ? "bg-dark4":"bg-white"}`}
+        className={`fixed bottom-10 right-10 cursor-pointer hover:shadow flex items-center border p-2 rounded-full animate-heartBeat ${theme == "dark" ? "bg-dark4":"bg-white"}`}
       >
         <span className='text-lg font-semibold min-w-[40px] text-end select-none'>
           {like}
         </span>
         <Icon
           icon='ph:hands-clapping-fill'
-          className='hover:text-orange-600 select-none'
+          className='hover:text-orange-600 select-none hover:animate-wiggle'
           fontSize={36}
         />
       </div>
