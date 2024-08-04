@@ -1,13 +1,10 @@
 import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
-// import hljs from "highlight.js";
-// import hljs from "highlight.js/lib/core";
-// import "highlight.js/styles/github-dark.css";
+import { useTheme } from "@/app/Configs/ThemeContext";
 import Network from "@/utils/Network";
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useTheme } from "@/app/Configs/ThemeContext";
 
 type Props = {
   data: BlogPost;
@@ -33,18 +30,15 @@ const SingleBlogPost = ({ data, code }: Props) => {
     }
   };
 
-  // if (!hljs) {
-  //   console.log("hljs");
-
-  //   return;
-  // }
-
-  // useEffect(() => {
-  //   if (data.content) {
-  //     hljs.highlightAll();
-  //   }
-  // }, [data.content]);
-
+  useEffect(() => {
+    if (typeof window !== "undefined" && data.content) {
+      import("highlight.js").then((hljs) => {
+        document.querySelectorAll("pre code").forEach((block) => {
+          hljs.default.highlightAll();
+        });
+      });
+    }
+  }, [data.content]);
   return (
     <div className='w-full relative'>
       <section className='w-full p-5 h-[calc(100vh-107px)] overflow-auto'>
@@ -88,7 +82,9 @@ const SingleBlogPost = ({ data, code }: Props) => {
       </section>
       <div
         onClick={() => getCount("like")}
-        className={`fixed bottom-10 right-10 cursor-pointer hover:shadow flex items-center border p-2 rounded-full animate-heartBeat ${theme == "dark" ? "bg-dark4":"bg-white"}`}
+        className={`fixed bottom-10 right-10 cursor-pointer hover:shadow flex items-center border p-2 rounded-full animate-heartBeat ${
+          theme == "dark" ? "bg-dark4" : "bg-white"
+        }`}
       >
         <span className='text-lg font-semibold min-w-[40px] text-end select-none'>
           {like}
