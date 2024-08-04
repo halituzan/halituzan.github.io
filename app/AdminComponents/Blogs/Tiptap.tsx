@@ -9,6 +9,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import "./styles.scss";
 
+
 export default ({ setOpen }: any) => {
   const [hideContent, setHideContent] = useState(false);
   const [openTagList, setOpenTagList] = useState(false);

@@ -1,12 +1,13 @@
 import { BlogPost, TagProps } from "@/app/Configs/types";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import hljs from "highlight.js";
-
+// import hljs from "highlight.js/lib/core";
 // import "highlight.js/styles/github-dark.css";
 import Network from "@/utils/Network";
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useTheme } from "@/app/Configs/ThemeContext";
 
 type Props = {
   data: BlogPost;
@@ -15,6 +16,9 @@ type Props = {
 
 const SingleBlogPost = ({ data, code }: Props) => {
   const [like, setLike] = useState(data.like);
+  const { theme } = useTheme();
+  console.log(theme);
+
   const getCount = async (endpoint: string) => {
     try {
       await Network.run(
@@ -28,6 +32,7 @@ const SingleBlogPost = ({ data, code }: Props) => {
       console.log(error);
     }
   };
+
   if (!hljs) {
     console.log("hljs");
 
@@ -83,7 +88,7 @@ const SingleBlogPost = ({ data, code }: Props) => {
       </section>
       <div
         onClick={() => getCount("like")}
-        className='fixed bottom-10 right-10 cursor-pointer hover:shadow flex items-center border p-2 rounded-full'
+        className={`fixed bottom-10 right-10 cursor-pointer hover:shadow flex items-center border p-2 rounded-full ${theme == "dark" ? "bg-dark4":"bg-white"}`}
       >
         <span className='text-lg font-semibold min-w-[40px] text-end select-none'>
           {like}

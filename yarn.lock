@@ -336,13 +336,6 @@
   resolved "https://registry.npmjs.org/@types/bcryptjs/-/bcryptjs-2.4.6.tgz"
   integrity sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ==
 
-"@types/hast@^3.0.0":
-  version "3.0.4"
-  resolved "https://registry.npmjs.org/@types/hast/-/hast-3.0.4.tgz"
-  integrity sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==
-  dependencies:
-    "@types/unist" "*"
-
 "@types/highlight.js@^10.1.0":
   version "10.1.0"
   resolved "https://registry.npmjs.org/@types/highlight.js/-/highlight.js-10.1.0.tgz"
@@ -369,11 +362,6 @@
   integrity sha512-/5hndP5dCjloafCXns6SZyESp3Ldq7YjH3zwzwczYnjxIT0Fqzk5ROSYVGfFyczIue7IUEj8hkvLbPoLQ18vQw==
   dependencies:
     "@types/node" "*"
-
-"@types/lowlight@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.npmjs.org/@types/lowlight/-/lowlight-0.0.7.tgz"
-  integrity sha512-81Q0Vdv6JEI1y1TCDMveiBvIT/H//jnaZsOigZQkU31Os9s3Kpe0/0qTiLivpYf1rM7v4AFF3QXvJHULZDOn4w==
 
 "@types/node@*", "@types/node@^20":
   version "20.12.10"
@@ -413,11 +401,6 @@
   version "0.0.32"
   resolved "https://registry.npmjs.org/@types/shortid/-/shortid-0.0.32.tgz"
   integrity sha512-LwWF89yy6Ol8abraYbVedIKzMlgJCTx8zm40yx9t0ZPOJaVR0OmSO4zRRAKfyOJtCwZrEBmhueZX8OiNbQydYw==
-
-"@types/unist@*":
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/@types/unist/-/unist-3.0.2.tgz"
-  integrity sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==
 
 "@types/use-sync-external-store@^0.0.3":
   version "0.0.3"
@@ -646,18 +629,6 @@ delayed-stream@~1.0.0:
   resolved "https://registry.npmjs.org/delayed-stream/-/delayed-stream-1.0.0.tgz"
   integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
 
-dequal@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz"
-  integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
-
-devlop@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/devlop/-/devlop-1.1.0.tgz"
-  integrity sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==
-  dependencies:
-    dequal "^2.0.0"
-
 didyoumean@^1.2.2:
   version "1.2.2"
   resolved "https://registry.npmjs.org/didyoumean/-/didyoumean-1.2.2.tgz"
@@ -800,11 +771,6 @@ highlight.js@*, highlight.js@^11.10.0:
   version "11.10.0"
   resolved "https://registry.npmjs.org/highlight.js/-/highlight.js-11.10.0.tgz"
   integrity sha512-SYVnVFswQER+zu1laSya563s+F8VDGt7o35d4utbamowvUNLLMovFqwCLSocpZTz3MgaSRA1IbqRWZv97dtErQ==
-
-highlight.js@~11.9.0:
-  version "11.9.0"
-  resolved "https://registry.npmjs.org/highlight.js/-/highlight.js-11.9.0.tgz"
-  integrity sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==
 
 hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
@@ -1013,15 +979,6 @@ loose-envify@^1.1.0:
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
-
-lowlight@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/lowlight/-/lowlight-3.1.0.tgz"
-  integrity sha512-CEbNVoSikAxwDMDPjXlqlFYiZLkDJHwyGu/MfOsJnF3d7f3tds5J3z8s/l9TMXhzfsJCCJEAsD78842mwmg0PQ==
-  dependencies:
-    "@types/hast" "^3.0.0"
-    devlop "^1.0.0"
-    highlight.js "~11.9.0"
 
 lru-cache@^10.2.0:
   version "10.2.2"
@@ -1326,11 +1283,6 @@ print-js@^1.6.0:
   version "1.6.0"
   resolved "https://registry.npmjs.org/print-js/-/print-js-1.6.0.tgz"
   integrity sha512-BfnOIzSKbqGRtO4o0rnj/K3681BSd2QUrsIZy/+WdCIugjIswjmx3lDEZpXB2ruGf9d4b3YNINri81+J0FsBWg==
-
-prismjs@^1.29.0:
-  version "1.29.0"
-  resolved "https://registry.npmjs.org/prismjs/-/prismjs-1.29.0.tgz"
-  integrity sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==
 
 prosemirror-changeset@^2.2.1:
   version "2.2.1"
