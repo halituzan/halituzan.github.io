@@ -14,6 +14,10 @@ class CustomDocument extends Document {
             sizes='180x180'
             href='/images/apple-touch-icon.png'
           />
+          <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1.0'
+          ></meta>
           <link rel='shortcut icon' href='/images/favicon.ico' />
           <title>Welcome Halit's Page</title>
         </Head>

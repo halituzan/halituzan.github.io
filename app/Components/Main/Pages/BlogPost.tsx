@@ -1,10 +1,11 @@
-import { BlogPost, TagProps } from "@/app/Configs/types";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import { useTheme } from "@/app/Configs/ThemeContext";
+import { BlogPost, TagProps } from "@/app/Configs/types";
 import Network from "@/utils/Network";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Meta from "../../Patterns/Meta";
 
 type Props = {
   data: BlogPost;
@@ -14,9 +15,8 @@ type Props = {
 const SingleBlogPost = ({ data, code }: Props) => {
   const [like, setLike] = useState(data.like);
   const { theme } = useTheme();
-  console.log(theme);
-
   const getCount = async (endpoint: string) => {
+    setLike((prev) => prev + 1);
     try {
       await Network.run(
         null,
@@ -24,7 +24,6 @@ const SingleBlogPost = ({ data, code }: Props) => {
         "/blogs/interactions/" + endpoint + "?code=" + code,
         null
       );
-      setLike((prev) => prev + 1);
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +40,13 @@ const SingleBlogPost = ({ data, code }: Props) => {
   }, [data.content]);
   return (
     <div className='w-full relative'>
+      <Meta
+        title={data.title}
+        description={data.summary}
+        keywords={data?.tags}
+        ogTitle={data.title}
+        ogDescription={data.summary}
+      />
       <section className='w-full p-5 h-[calc(100vh-107px)] overflow-auto'>
         <h1 className='text-4xl my-0 font-semibold'>{data.title}</h1>
         <article className='my-6'>
