@@ -185,14 +185,27 @@ const Navbar = (props: Props) => {
                 className='outline-none w-full py-1 rounded-md px-4 bg-light1 text-light5'
               />
               {searchList.length > 0 && (
-                <div className='absolute bg-white top-10 rounded-md w-full flex flex-col z-50 shadow-lg'>
+                <div
+                  className={`absolute top-10 border w-full flex divide-y flex-col z-50 shadow-lg ${
+                    theme == "dark" ? "bg-dark4 border-dark3 " : " bg-light1 border-light4"
+                  }`}
+                >
                   {searchList.map(
                     (item: { title: string; url: string; code: string }) => {
                       return (
                         <Link
                           onClick={() => setSeachList([])}
-                          href={"/blogs/" + item.url + "-" + item.code}
-                          className='p-2 border-y hover:bg-slate-100 cursor-pointer w-full'
+                          href={
+                            "/blogs/" +
+                            item.url.replace("—", "") +
+                            "-" +
+                            item.code
+                          }
+                          className={`p-2 cursor-pointer w-full text-[13px] ${
+                            theme == "dark"
+                              ? "hover:bg-dark5"
+                              : "hover:bg-light4"
+                          }`}
                         >
                           {item.title}
                         </Link>
