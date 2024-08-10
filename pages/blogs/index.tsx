@@ -1,7 +1,6 @@
 import Blog from "@/app/Components/Main/Pages/Blog";
 import { BlogPost } from "@/app/Configs/types";
 import Network from "@/utils/Network";
-import React from "react";
 
 type Props = {
   data: BlogPost[];

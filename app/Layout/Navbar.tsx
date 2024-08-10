@@ -9,6 +9,8 @@ import {
 } from "@/lib/features/routes/routeSlice";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
+import Network from "@/utils/Network";
+import Link from "next/link";
 type Props = {};
 
 const Navbar = (props: Props) => {
@@ -19,6 +21,7 @@ const Navbar = (props: Props) => {
   const currentPage = selectPageList.find((i) => i.isOpen);
   const currentPageIndex = selectPageList.findIndex((i) => i.isOpen);
   const [isSearch, setIsSearch] = useState(false);
+  const [searchList, setSeachList] = useState([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -69,6 +72,24 @@ const Navbar = (props: Props) => {
         type: "next",
       })
     );
+  };
+
+  const searchHandle = async (value: string) => {
+    if (value.length < 3) {
+      setSeachList([]);
+      return;
+    }
+    try {
+      const res = await Network.run(
+        null,
+        "GET",
+        `/blogs/search?s=${value}`,
+        null
+      );
+      setSeachList(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -147,20 +168,40 @@ const Navbar = (props: Props) => {
               : "border-slate-400 text-dark3 hover:bg-light2"
           }`}
         >
-          {!isSearch ? (
+          {!isSearch && searchList.length == 0 ? (
             <p className='py-1 px-4'>
               {currentPage ? t(currentPage.title) : t("welcome")}
             </p>
           ) : (
-            <input
-              ref={inputRef}
-              type='text'
-              placeholder='Search...'
-              onBlur={() => {
-                setIsSearch(false);
-              }}
-              className='outline-none w-full py-1 rounded-md px-4 bg-light1 text-light5'
-            />
+            <div className='relative w-full'>
+              <input
+                ref={inputRef}
+                type='text'
+                placeholder='Search...'
+                onBlur={() => {
+                  setIsSearch(false);
+                }}
+                onChange={(e) => searchHandle(e.target.value)}
+                className='outline-none w-full py-1 rounded-md px-4 bg-light1 text-light5'
+              />
+              {searchList.length > 0 && (
+                <div className='absolute bg-white top-10 rounded-md w-full flex flex-col z-50 shadow-lg'>
+                  {searchList.map(
+                    (item: { title: string; url: string; code: string }) => {
+                      return (
+                        <Link
+                          onClick={() => setSeachList([])}
+                          href={"/blogs/" + item.url + "-" + item.code}
+                          className='p-2 border-y hover:bg-slate-100 cursor-pointer w-full'
+                        >
+                          {item.title}
+                        </Link>
+                      );
+                    }
+                  )}
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>

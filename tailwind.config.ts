@@ -34,10 +34,17 @@ const config: Config = {
           "50%": { transform: "scale(1.05);" },
           "100%": { transform: "scale(1);" },
         },
+        loader: {
+          to: {
+            opacity: "0.1",
+            transform: "translate3d(0, -1rem, 0)",
+          },
+        },
       },
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",
         heartBeat: "heartBeat 2s ",
+        loader: "loader 0.6s infinite alternate",
       },
     },
   },
