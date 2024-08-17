@@ -3,12 +3,12 @@ import { TagProps } from "@/app/Configs/types";
 import Network from "@/utils/Network";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "@tiptap/extension-link";
+import Youtube from "@tiptap/extension-youtube";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import "./styles.scss";
-
 
 export default ({ setOpen }: any) => {
   const [hideContent, setHideContent] = useState(false);
@@ -21,6 +21,7 @@ export default ({ setOpen }: any) => {
     summary: "",
     tags: [],
   });
+  console.log(values);
 
   const { title, content, summary, tags } = values;
 
@@ -34,6 +35,10 @@ export default ({ setOpen }: any) => {
       }),
       Placeholder.configure({
         placeholder: "Write something …",
+      }),
+      Youtube.configure({
+        controls: false,
+        nocookie: true,
       }),
     ],
     content: "",
@@ -114,6 +119,7 @@ export default ({ setOpen }: any) => {
           }`}
         >
           <MenuBar editor={editor} setLink={setLink} />
+
           <EditorContent editor={editor} />
           <div className='w-full my-2 mt-4 relative'>
             <textarea
@@ -179,7 +185,10 @@ export default ({ setOpen }: any) => {
                     onClick={() => {
                       setValues({
                         ...values,
-                        tags: [...tags, { _id: i._id, name: i.name }],
+                        tags: [
+                          ...tags,
+                          { _id: i._id, name: i.name, url: i.url },
+                        ],
                       });
                       setTagList(
                         tagList.filter((item: TagProps) => item._id !== i._id)
@@ -227,9 +236,21 @@ const MenuBar = ({ editor, setLink }: any) => {
     return null;
   }
 
+  const addYoutubeVideo = () => {
+    const url = prompt("Enter YouTube URL");
+
+    if (url) {
+      editor.commands?.setYoutubeVideo({
+        src: url,
+        width: Math.max(320, parseInt("640", 10)) || 640,
+        height: Math.max(180, parseInt("480", 10)) || 480,
+      });
+    }
+  };
+
   return (
-    <div className='control-group bg-slate-50 mb-2'>
-      <div className='button-group flex items-center'>
+    <div className='control-group bg-slate-50 mb-2 relative sticky z-40 top-80'>
+      <div className='button-group flex items-center '>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "is-active" : ""}
@@ -249,17 +270,8 @@ const MenuBar = ({ editor, setLink }: any) => {
           Strike
         </button>
         <button
-          onClick={() =>
-            editor
-              .chain()
-              .focus()
-              .configure({
-                className: "js",
-              })
-              .toggleCode()
-              .run()
-          }
-          className={editor.isActive("code") ? "is-active" : ""}
+          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+          className={editor.isActive("codeBlock") ? "is-active" : ""}
         >
           Code
         </button>
@@ -329,6 +341,10 @@ const MenuBar = ({ editor, setLink }: any) => {
         >
           Link
         </button>
+        <button id='add' onClick={addYoutubeVideo}>
+          Add YouTube video
+        </button>
+
         {/*
         <button onClick={() => editor.chain().focus().clearNodes().run()}>
           Clear nodes
@@ -352,12 +368,7 @@ const MenuBar = ({ editor, setLink }: any) => {
         >
           list
         </button>
-        <button
-          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          className={editor.isActive("codeBlock") ? "is-active" : ""}
-        >
-          Code block
-        </button>
+
         <button
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           className={editor.isActive("blockquote") ? "is-active" : ""}
@@ -369,9 +380,9 @@ const MenuBar = ({ editor, setLink }: any) => {
         >
           Horizontal rule
         </button> */}
-        {/* <button onClick={() => editor.chain().focus().setHardBreak().run()}>
+        <button onClick={() => editor.chain().focus().setHardBreak().run()}>
           Hard break
-        </button> */}
+        </button>
         <button onClick={() => editor.chain().focus().undo().run()}>
           <Icon icon={"ri:reply-line"} fontSize={20} />
         </button>

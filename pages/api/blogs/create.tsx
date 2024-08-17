@@ -54,6 +54,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       summary,
       tags,
       author: user.firstName + " " + user.lastName,
+      userId,
     });
     await newBlog.save();
     res.status(201).json({

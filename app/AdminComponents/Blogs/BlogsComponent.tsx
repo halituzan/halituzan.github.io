@@ -11,8 +11,7 @@ const BlogsComponent = (props: Props) => {
   const [blogList, setBlogList] = useState([]);
   const getBlogList = async () => {
     try {
-      const res = await Network.getData("blogs");
-      console.log(res);
+      const res = await Network.getData("admin/blogs");
       setBlogList(res.data);
     } catch (error) {
       console.log(error);
@@ -39,6 +38,8 @@ const BlogsComponent = (props: Props) => {
           </div>
         )}
         {blogList.map((item: any) => {
+          console.log(item);
+          
           return (
             <div
               key={item?._id}
@@ -49,7 +50,7 @@ const BlogsComponent = (props: Props) => {
                 <div className='flex p-2'>
                   <div>
                     <strong>Yazar: </strong>
-                    <span>Halit Uzan</span>
+                    <span>{item.author}</span>
                   </div>
 
                   <div className='ml-2'>
