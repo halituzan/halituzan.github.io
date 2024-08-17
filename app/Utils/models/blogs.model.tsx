@@ -41,7 +41,7 @@ const BlogsSchema = new Schema({
     type: [Object],
     default: [],
   },
-  wiew: {
+  view: {
     type: Number,
     default: 0,
   },

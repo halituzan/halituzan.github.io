@@ -37,6 +37,7 @@ const SingleBlogPost = ({ data, code }: Props) => {
         });
       });
     }
+    getCount("view");
   }, [data.content]);
   return (
     <div className='w-full relative'>
