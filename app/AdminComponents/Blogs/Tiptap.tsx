@@ -10,7 +10,9 @@ import StarterKit from "@tiptap/starter-kit";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import "./styles.scss";
 
-export default ({ setOpen }: any) => {
+export default ({ setOpen, current, mount }: any) => {
+  console.log("current", current);
+
   const [hideContent, setHideContent] = useState(false);
   const [openTagList, setOpenTagList] = useState(false);
   const [tagList, setTagList] = useState<any>([]);
@@ -21,9 +23,8 @@ export default ({ setOpen }: any) => {
     summary: "",
     tags: [],
   });
-  console.log(values);
 
-  const { title, content, summary, tags } = values;
+  const { title, summary, tags } = values;
 
   const editor = useEditor({
     extensions: [
@@ -41,7 +42,7 @@ export default ({ setOpen }: any) => {
         nocookie: true,
       }),
     ],
-    content: "",
+    content: current?.content ?? "",
 
     editorProps: {
       attributes: {
@@ -58,11 +59,10 @@ export default ({ setOpen }: any) => {
   const setLink = useCallback(() => {
     const previousUrl = editor?.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
-    console.log("2");
+
     if (url === null) {
       return;
     }
-    console.log("2");
 
     if (url === "") {
       editor?.chain().focus().extendMarkRange("link").unsetLink().run();
@@ -87,15 +87,50 @@ export default ({ setOpen }: any) => {
   };
   const createPost = async () => {
     try {
-      const res = await Network.run(null, "POST", "/blogs/create", values);
-      console.log("res", res);
+      await Network.run(null, "POST", "/blogs/create", values);
+      setOpen(false);
+      mount();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updatePost = async () => {
+    try {
+      await Network.run(null, "PATCH", `/blogs/update`, {
+        ...values,
+        id: current._id,
+      });
+      setOpen(false);
+      mount();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deletePost = async () => {
+    try {
+      await Network.run(null, "DELETE", `/blogs/delete`, {
+        id: current._id,
+      });
+      setOpen(false);
+      mount();
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
     getTags();
-  }, []);
+    if (current) {
+      setValues({
+        title: current.title,
+        content: current.content,
+        summary: current.summary,
+        tags: current.tags,
+      });
+      if (current.content && editor) {
+        editor?.commands.setContent(current.content);
+      }
+    }
+  }, [current]);
   return (
     <Fragment>
       <div
@@ -208,12 +243,29 @@ export default ({ setOpen }: any) => {
             >
               İptal
             </button>
-            <button
-              className='p-2 bg-blue-600 rounded text-white'
-              onClick={createPost}
-            >
-              Kaydet
-            </button>
+            {current ? (
+              <button
+                className='p-2 bg-blue-600 rounded text-white mr-2'
+                onClick={updatePost}
+              >
+                Güncelle
+              </button>
+            ) : (
+              <button
+                className='p-2 bg-blue-600 rounded text-white'
+                onClick={createPost}
+              >
+                Kaydet
+              </button>
+            )}
+            {current && (
+              <button
+                className='p-2 px-4 bg-red-600 rounded text-white'
+                onClick={deletePost}
+              >
+                Sil
+              </button>
+            )}
           </div>
         </div>
         {/* <div className='mt-2 flex justify-center items-center z-0 py-2 w-full'>
@@ -249,7 +301,7 @@ const MenuBar = ({ editor, setLink }: any) => {
   };
 
   return (
-    <div className='control-group bg-slate-50 mb-2 relative sticky z-40 top-80'>
+    <div className='control-group bg-slate-50 mb-2 sticky z-40 top-5'>
       <div className='button-group flex items-center '>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
@@ -342,7 +394,7 @@ const MenuBar = ({ editor, setLink }: any) => {
           Link
         </button>
         <button id='add' onClick={addYoutubeVideo}>
-          Add YouTube video
+          Add video
         </button>
 
         {/*

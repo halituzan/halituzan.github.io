@@ -3,12 +3,14 @@ import Network from "@/app/Utils/Network";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import moment from "moment";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 const Tiptap = dynamic(() => import("./Tiptap"), { ssr: false });
 type Props = {};
 
-const BlogsComponent = (props: Props) => {
+const BlogsComponent = ({}: Props) => {
   const [openAddBlogPost, setOpenAddBlogPost] = useState(false);
   const [blogList, setBlogList] = useState([]);
+  const [currentBlog, setCurrentBlog] = useState<null | object>(null);
   const getBlogList = async () => {
     try {
       const res = await Network.getData("admin/blogs");
@@ -25,12 +27,19 @@ const BlogsComponent = (props: Props) => {
       <div>
         {openAddBlogPost ? (
           <div className='pb-12 '>
-            <Tiptap setOpen={setOpenAddBlogPost} />
+            <Tiptap
+              setOpen={setOpenAddBlogPost}
+              current={currentBlog}
+              mount={getBlogList}
+            />
           </div>
         ) : (
           <div className='p-4 flex justify-end'>
             <button
-              onClick={() => setOpenAddBlogPost(true)}
+              onClick={() => {
+                setOpenAddBlogPost(true);
+                setCurrentBlog(null);
+              }}
               className='py-1 px-2 bg-slate-500 hover:bg-slate-700 text-white rounded'
             >
               Yazı Ekle
@@ -38,8 +47,6 @@ const BlogsComponent = (props: Props) => {
           </div>
         )}
         {blogList.map((item: any) => {
-          console.log(item);
-          
           return (
             <div
               key={item?._id}
@@ -104,14 +111,23 @@ const BlogsComponent = (props: Props) => {
 
                   <Icon
                     icon={"bx:edit"}
+                    onClick={() => {
+                      setCurrentBlog(item);
+                      setOpenAddBlogPost(true);
+                    }}
                     className='cursor-pointer text-slate-500 hover:text-green-700'
                     fontSize={24}
                   />
-                  <Icon
-                    icon={"bx:link-external"}
-                    className='cursor-pointer text-slate-500 hover:text-green-700'
-                    fontSize={24}
-                  />
+                  <Link
+                    href={`/blogs/${item.url}-${item.code}`}
+                    target='_blank'
+                  >
+                    <Icon
+                      icon={"bx:link-external"}
+                      className='cursor-pointer text-slate-500 hover:text-green-700'
+                      fontSize={24}
+                    />
+                  </Link>
                 </div>
               </div>
               <div className='p-3 '>
