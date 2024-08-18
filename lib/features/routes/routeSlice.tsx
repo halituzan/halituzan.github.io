@@ -107,16 +107,12 @@ const routeSlice = createSlice({
     ) => {
       const { arr, index, type } = action.payload;
       if (type === "prev") {
-        console.log("prev", index);
-        console.log("selectedPageList", arr);
         const currentPageIndex = arr.findIndex((i: any) => i.isOpen);
         if (arr.length === index) {
           state.currentSide = "";
         }
       }
       if (type === "next") {
-        console.log("next", index);
-        console.log("selectedPageList", arr);
       }
     },
   },

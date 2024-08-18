@@ -22,7 +22,6 @@ const AdminLayout = ({ children }: Props) => {
     try {
       const data = await Network.getData("/me");
       dispatch(setUserInfo(data));
-      console.log(data);
     } catch (error) {
       dispatch(
         setUserInfo({

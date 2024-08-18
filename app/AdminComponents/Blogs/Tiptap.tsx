@@ -11,8 +11,6 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import "./styles.scss";
 
 export default ({ setOpen, current, mount }: any) => {
-  console.log("current", current);
-
   const [hideContent, setHideContent] = useState(false);
   const [openTagList, setOpenTagList] = useState(false);
   const [tagList, setTagList] = useState<any>([]);

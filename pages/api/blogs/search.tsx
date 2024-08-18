@@ -6,8 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 connectDBV2();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { s } = req.query;
-  console.log("ssssss",s);
-  
+
   try {
     const blogs = await Blogs.find({
       $or: [

@@ -27,7 +27,6 @@ const AboutPage = (props: Props) => {
     },
     social: [{ icon: "", id: "", name: "", url: "" }],
   });
-  console.log(values);
 
   const {
     firstName,
@@ -74,8 +73,6 @@ const AboutPage = (props: Props) => {
     }
   };
   const pickIcon = (value: any, index: number) => {
-    console.log(value);
-
     const filteredSocial = social.filter((_, ind) => ind !== index);
 
     setValues({ ...values, social: [...filteredSocial, value] });
@@ -92,7 +89,6 @@ const AboutPage = (props: Props) => {
           method: !dataOk ? "POST" : "PATCH",
         }
       );
-      console.log("res", res);
     } catch (error) {
       console.log(error);
     }
