@@ -75,16 +75,16 @@ const About = ({ data }: Props) => {
             /> */}
           </div>
           <div className='flex justify-center w-full items-end flex-1'>
-            {data?.social.map((item: any) => {
+            {data?.social?.map((item: any) => {
               return (
                 <Link
-                  key={item.id}
-                  href={item.url}
+                  key={item?.id}
+                  href={item?.url}
                   target='_blank'
                   className='mx-1'
                 >
                   <Icon
-                    icon={item.icon}
+                    icon={item?.icon}
                     fontSize={"2rem"}
                     className='text-dark1 hover:text-light1'
                   />
