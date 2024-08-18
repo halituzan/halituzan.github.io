@@ -8,8 +8,8 @@ type Props = {
 };
 
 const BlogsPage = ({ data }: Props) => {
-  console.log("data",data);
-  
+  console.log("data", data);
+
   if (data.length == 0) {
     return <Loading />;
   }
@@ -21,7 +21,6 @@ export default BlogsPage;
 export async function getServerSideProps(context: any) {
   try {
     const res = await Network.run(context, "GET", `/blogs`, null);
-console.log("resssssssssssssssssssssssssssssssssssssssssssss",res);
 
     return {
       props: {
