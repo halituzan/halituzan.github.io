@@ -2,9 +2,16 @@ import About from "@/app/Components/Main/Pages/About";
 import React from "react";
 import Config from "@/app/Configs/config";
 import Network from "@/utils/Network";
+import Loading from "@/app/Components/Patterns/Loading";
 type Props = { data: any };
 
 const AboutPage = ({ data }: Props) => {
+  console.log(data);
+  
+  if (!data) {
+    return <Loading />;
+  }
+
   return <About data={data} />;
 };
 
