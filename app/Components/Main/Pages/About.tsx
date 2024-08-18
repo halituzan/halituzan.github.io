@@ -1,3 +1,4 @@
+"use client"
 import { useTheme } from "@/app/Configs/ThemeContext";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
@@ -53,7 +54,7 @@ const About = ({ data }: Props) => {
             <InfoRow
               theme={theme}
               field={t("location")}
-              title={data?.location.city + " / " + data?.location.country}
+              title={data?.location?.city + " / " + data?.location?.country}
             />
             <InfoRow theme={theme} field={t("degree")} title={data?.degree} />
             {/* <InfoRow
@@ -99,7 +100,7 @@ const About = ({ data }: Props) => {
           theme == "dark" ? "bg-dark5 text-light2" : "bg-light4 text-dark1"
         }`}
       >
-        <div dangerouslySetInnerHTML={{ __html: data.description }} />
+        <div dangerouslySetInnerHTML={{ __html: data?.description }} />
       </div>
     </div>
   );
