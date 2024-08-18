@@ -5,11 +5,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 connectDBV2();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { id } = req.query;
+  // const { id } = req.query;
 
-  if (!id) {
-    return;
-  }
+  // if (!id) {
+  //   return;
+  // }
   try {
     // const blogs = await Blogs.find({
     //   userId: id,
