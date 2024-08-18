@@ -7,7 +7,7 @@ type Props = { data: any };
 
 const AboutPage = ({ data }: Props) => {
   console.log(data);
-  
+
   if (!data) {
     return <Loading />;
   }
@@ -20,12 +20,7 @@ export default AboutPage;
 export async function getServerSideProps(context: any) {
   const userId = process.env.NEXT_PUBLIC_USER_ID;
   try {
-    const res = await Network.run(
-      null,
-      "GET",
-      "/about/aboutget?id=" + userId,
-      null
-    );
+    const res = await Network.run(null, "GET", "/about/aboutget", null);
 
     return {
       props: {

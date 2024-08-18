@@ -14,12 +14,8 @@ export default BlogsPage;
 
 export async function getServerSideProps(context: any) {
   try {
-    const res = await Network.run(
-      context,
-      "GET",
-      `/blogs?id=${process.env.NEXT_PUBLIC_USER_ID}`,
-      null
-    );
+    const res = await Network.run(context, "GET", `/blogs`, null);
+
     return {
       props: {
         data: res.data || [],
