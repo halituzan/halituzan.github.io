@@ -12,7 +12,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
   try {
-    const about = await Abouts.findOne({ user: userId });
+    // const about = await Abouts.findOne({ user: userId });
+    const about = await Abouts.findOne({});
 
     if (!about) {
       return res

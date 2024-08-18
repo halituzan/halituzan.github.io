@@ -11,9 +11,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
   try {
-    const blogs = await Blogs.find({
-      userId: id,
-    });
+    // const blogs = await Blogs.find({
+    //   userId: id,
+    // });
+    const blogs = await Blogs.find({});
     return res.status(200).json({
       data: blogs,
       status: true,
