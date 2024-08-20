@@ -9,6 +9,8 @@ type Props = {
 };
 
 const About = ({ data }: Props) => {
+  console.log("data",data);
+  
   const { t } = useTranslation("profile");
   const { theme } = useTheme();
   return (

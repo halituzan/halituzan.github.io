@@ -20,7 +20,12 @@ export default AboutPage;
 export async function getServerSideProps(context: any) {
   const userId = process.env.NEXT_PUBLIC_USER_ID;
   try {
-    const res = await Network.run(null, "GET", "/about/aboutget", null);
+    const res = await Network.run(
+      null,
+      "GET",
+      "/about/aboutget?id=" + userId,
+      null
+    );
 
     return {
       props: {
