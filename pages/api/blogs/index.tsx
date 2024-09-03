@@ -7,6 +7,7 @@ connectDBV2();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const blogs = await Blogs.find({});
+    console.log("blogs", blogs);
     return res.status(200).json({
       data: blogs,
       status: true,

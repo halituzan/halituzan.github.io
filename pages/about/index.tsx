@@ -23,7 +23,7 @@ export async function getServerSideProps(context: any) {
     const res = await Network.run(
       null,
       "GET",
-      "/about/aboutget?id=" + userId,
+      "/about/aboutget?id=669eb755c42b621e680a24a7",
       null
     );
 

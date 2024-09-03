@@ -133,7 +133,13 @@ const Sidebar = (props: Props) => {
           onMouseLeave={() => setShowLang(false)}
         >
           <Icon
-            icon={selectedLang == "tr" ? "circle-flags:tr" : "circle-flags:gb"}
+            icon={
+              selectedLang == "tr"
+                ? "circle-flags:tr"
+                : selectedLang == "en"
+                ? "circle-flags:gb"
+                : "circle-flags:tr"
+            }
             fontSize={32}
             className={` ${
               theme === "dark"
@@ -193,7 +199,17 @@ const Sidebar = (props: Props) => {
                   }`}
                 >
                   <Icon icon='tabler:eye' />
-                  <a href='./files/cv.pdf' className='ml-1' target='_blank'>
+                  <a
+                    href={
+                      window.localStorage.getItem("lng") == "tr"
+                        ? "./files/cv.pdf"
+                        : window.localStorage.getItem("lng") == "en"
+                        ? "./files/cv-en.pdf"
+                        : "./files/cv.pdf"
+                    }
+                    className='ml-1'
+                    target='_blank'
+                  >
                     {t("cv.preview")}
                   </a>
                 </div>
@@ -205,7 +221,13 @@ const Sidebar = (props: Props) => {
                 >
                   <Icon icon='tabler:file-download' />
                   <a
-                    href='./files/cv.pdf'
+                    href={
+                      window.localStorage.getItem("lng") == "tr"
+                        ? "./files/cv.pdf"
+                        : window.localStorage.getItem("lng") == "en"
+                        ? "./files/cv-en.pdf"
+                        : "./files/cv.pdf"
+                    }
                     className='ml-1'
                     target='_blank'
                     download

@@ -8,11 +8,6 @@ type Props = {
 };
 
 const BlogsPage = ({ data }: Props) => {
-  console.log("data", data);
-
-  if (data.length == 0) {
-    return <Loading />;
-  }
   return <Blog data={data} title='Blog Post' isTagPage={false} />;
 };
 
