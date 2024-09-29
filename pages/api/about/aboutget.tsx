@@ -6,22 +6,20 @@ import { NextApiRequest, NextApiResponse } from "next";
 connectDBV2();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const userId = req.query.id;
-
   try {
-    const about = await Abouts.findOne({ user: userId });
+    const about = await Abouts.find({});
 
     const payload = {
-      firstName: about.firstName,
-      lastName: about.lastName,
-      description: about.description,
-      title: about.title,
-      degree: about.degree,
-      email: about.email,
-      phone: about.phone,
-      location: about.location,
-      social: about.social,
-      user: about.user,
+      firstName: about[0].firstName,
+      lastName: about[0].lastName,
+      description: about[0].description,
+      title: about[0].title,
+      degree: about[0].degree,
+      email: about[0].email,
+      phone: about[0].phone,
+      location: about[0].location,
+      social: about[0].social,
+      user: about[0].user,
     };
 
     return res.status(200).json({
