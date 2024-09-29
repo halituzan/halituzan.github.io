@@ -8,7 +8,6 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 type Props = {};
 
 const AboutPage = (props: Props) => {
-  const userId = process.env.NEXT_PUBLIC_USER_ID;
   const [dataOk, setDataOk] = useState(true);
   const [openIconList, setOpenIconList] = useState(false);
   const [iconList, setIconList] = useState([]);
@@ -44,12 +43,7 @@ const AboutPage = (props: Props) => {
 
   const getAbout = async () => {
     try {
-      const res = await Network.run(
-        null,
-        "GET",
-        "/about/aboutget?id=" + userId,
-        null
-      );
+      const res = await Network.run(null, "GET", "/about/aboutget", null);
       const icons = await Network.run(null, "GET", "icons", null);
       setValues(res.data);
       setIconList(icons.data ?? []);
