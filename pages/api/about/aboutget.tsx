@@ -8,17 +8,8 @@ connectDBV2();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const userId = req.query.id;
 
-  if (!userId) {
-    return;
-  }
   try {
     const about = await Abouts.findOne({ user: userId });
-
-    if (!about) {
-      return res
-        .status(404)
-        .json({ message: "Böyle Bir Kullanıcı Bulunamıyor" });
-    }
 
     const payload = {
       firstName: about.firstName,

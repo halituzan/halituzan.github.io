@@ -1,13 +1,9 @@
 import About from "@/app/Components/Main/Pages/About";
-import React from "react";
-import Config from "@/app/Configs/config";
-import Network from "@/utils/Network";
 import Loading from "@/app/Components/Patterns/Loading";
-type Props = { data: any };
+import Network from "@/utils/Network";
+type Props = { data: any; messages: string };
 
-const AboutPage = ({ data }: Props) => {
-  console.log(data);
-
+const AboutPage = ({ data, messages }: Props) => {
   if (!data) {
     return <Loading />;
   }
@@ -30,12 +26,14 @@ export async function getServerSideProps(context: any) {
     return {
       props: {
         data: res.data || [],
+        messages: "success",
       },
     };
   } catch (error) {
     return {
       props: {
         data: [],
+        messages: "error",
       },
     };
   }
