@@ -19,7 +19,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       phone: about[0].phone,
       location: about[0].location,
       social: about[0].social,
-      user: about[0].user,
     };
 
     return res.status(200).json({

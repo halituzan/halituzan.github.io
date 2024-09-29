@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const AboutSchema = new Schema({
-  user: { type: String },
   title: {
     type: String,
     default: "",
