@@ -121,7 +121,7 @@ const Kelimeler = () => {
           ></textarea>
         </div>
 
-        <div className='w-[300px] flex items-start mt-10 justify-center px-10'>
+        <div className='md:w-[300px] flex items-start mt-10 justify-center px-1 md:px-10'>
           <button
             className={`${
               theme === "dark" ? "bg-dark3 text-light5" : "bg-light6 text-dark5"
