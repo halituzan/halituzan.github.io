@@ -1,38 +1,7 @@
 import About from "@/app/Components/Main/Pages/About";
-import Loading from "@/app/Components/Patterns/Loading";
-import Network from "@/utils/Network";
-type Props = { data: any; messages: string };
 
-const AboutPage = ({ data, messages }: Props) => {
-  console.log("data", data);
-
-  if (!data) {
-    return <Loading />;
-  }
-
-  return <About data={data} />;
+const AboutPage = () => {
+  return <About />;
 };
 
 export default AboutPage;
-
-export async function getServerSideProps(context: any) {
-  try {
-    const res = await Network.run(context, "GET", "/api/about/aboutget", null);
-
-    return {
-      props: {
-        data: res.data || [],
-        messages: "success",
-      },
-    };
-  } catch (error) {
-    console.log("error", error);
-
-    return {
-      props: {
-        data: [],
-        messages: "error",
-      },
-    };
-  }
-}

@@ -4,20 +4,50 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import moment from "moment";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Loading from "../../Patterns/Loading";
+import Network from "@/utils/Network";
 
 type Props = {
-  data: BlogPost[];
   title: string;
   isTagPage: boolean;
 };
 
-const Blog = ({ data, title, isTagPage }: Props) => {
-  console.log("data", data);
-
+const Blog = ({ title, isTagPage }: Props) => {
   const router = useRouter();
   const { tag } = router.query;
+  const [datas, setDatas] = useState<BlogPost[]>([]);
+
+  const getData = async () => {
+    try {
+      const res = await Network.run(null, "GET", `/api/blogs`, null);
+      setDatas(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getTag = async () => {
+    try {
+      const res = await Network.run(
+        null,
+        "GET",
+        `/api/blogs/blogtags?tag=${tag}`,
+        null
+      );
+      setDatas(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (isTagPage) {
+      getTag();
+    } else {
+      getData();
+    }
+  }, []);
 
   return (
     <Suspense fallback={<Loading />}>
@@ -40,13 +70,13 @@ const Blog = ({ data, title, isTagPage }: Props) => {
             </Link>
             <div>
               <span className='font-bold'>{tag}</span> etiketi ile{" "}
-              <span className='font-bold'>({data.length})</span> adet içerik
+              <span className='font-bold'>({datas.length})</span> adet içerik
               bulundu
             </div>
           </div>
         )}
 
-        {data.map((item) => {
+        {datas.map((item: any) => {
           return (
             <article key={item._id} className='my-6'>
               <Link href={`/blogs/${item.url + "-" + item.code}`}>

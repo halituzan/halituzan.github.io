@@ -6,17 +6,23 @@ import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Meta from "../../Patterns/Meta";
+import { useRouter } from "next/router";
 
-type Props = {
-  data: BlogPost;
-  code: string;
-};
+type Props = {};
 
-const SingleBlogPost = ({ data, code }: Props) => {
-  const [like, setLike] = useState(data.like);
+const SingleBlogPost = ({}: Props) => {
+  const router = useRouter();
+
+  const [data, setDatas] = useState<any>({});
+
+  const [like, setLike] = useState(0);
   const { theme } = useTheme();
   const getCount = async (endpoint: string) => {
-    setLike((prev) => prev + 1);
+    if (!router?.query.url || typeof router.query.url !== "string") {
+      return;
+    }
+    const code = router?.query?.url?.split("BP-")[1];
+    setLike((prev: number) => prev + 1);
     try {
       await Network.run(
         null,
@@ -28,6 +34,29 @@ const SingleBlogPost = ({ data, code }: Props) => {
       console.log(error);
     }
   };
+
+  const getData = async () => {
+    if (!router?.query.url || typeof router.query.url !== "string") {
+      return;
+    }
+    const code = router?.query?.url?.split("BP-")[1];
+    try {
+      const res = await Network.run(
+        null,
+        "GET",
+        `/api/blogs/detail?code=${code}`,
+        null
+      );
+      setLike(res.data.like);
+      setDatas(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined" && data.content) {
@@ -66,7 +95,7 @@ const SingleBlogPost = ({ data, code }: Props) => {
             </div>
             <div className='flex justify-start items-center mr-2'>
               <p className='text-sm flex items-center' role='author'>
-                {data.tags.map((i: TagProps) => (
+                {data.tags?.map((i: TagProps) => (
                   <Link
                     href={"/tags/" + i.url}
                     key={i._id}
@@ -82,7 +111,7 @@ const SingleBlogPost = ({ data, code }: Props) => {
               </p>
             </div>
           </div>
-          <div className='mt-2 text-sm font-medium content-area'>
+          <div className='mt-2 text-sm font-medium content-area pr-4'>
             <div dangerouslySetInnerHTML={{ __html: data.content }} />
           </div>
         </article>

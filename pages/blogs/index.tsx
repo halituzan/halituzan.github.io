@@ -1,36 +1,7 @@
 import Blog from "@/app/Components/Main/Pages/Blog";
-import Loading from "@/app/Components/Patterns/Loading";
-import { BlogPost } from "@/app/Configs/types";
-import Network from "@/utils/Network";
 
-type Props = {
-  data: BlogPost[];
-};
-
-const BlogsPage = ({ data }: Props) => {
-  if (data.length == 0) {
-    return <Loading />;
-  }
-  return <Blog data={data} title='Blog Post' isTagPage={false} />;
+const BlogsPage = () => {
+  return <Blog title='Blog Post' isTagPage={false} />;
 };
 
 export default BlogsPage;
-
-export async function getServerSideProps(context: any) {
-  try {
-    const res = await Network.run(context, "GET", `/api/blogs`, null);
-
-    return {
-      props: {
-        data: res.data || [],
-      },
-    };
-  } catch (error) {
-    console.log("error", error);
-    return {
-      props: {
-        data: [],
-      },
-    };
-  }
-}

@@ -6,13 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-type Props = {
-  data?: any;
-};
 
-const About = ({ data }: Props) => {
-  console.log("data", data);
-
+const About = () => {
   const [datas, setDatas] = useState<any>({});
 
   const getData = async () => {
