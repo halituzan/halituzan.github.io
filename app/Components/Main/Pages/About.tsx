@@ -1,16 +1,33 @@
-"use client"
+"use client";
 import { useTheme } from "@/app/Configs/ThemeContext";
+import Network from "@/utils/Network";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 type Props = {
-  data: any;
+  data?: any;
 };
 
 const About = ({ data }: Props) => {
-  console.log("data",data);
-  
+  console.log("data", data);
+
+  const [datas, setDatas] = useState<any>({});
+
+  const getData = async () => {
+    try {
+      const res = await Network.run(null, "GET", "about/aboutget", null);
+      setDatas(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const { t } = useTranslation("profile");
   const { theme } = useTheme();
   return (
@@ -33,37 +50,37 @@ const About = ({ data }: Props) => {
               theme === "dark" ? "text-light2" : "text-dark1"
             }`}
           >
-            {data?.title}
+            {datas?.title}
           </p>
           <div className='grid grid-cols-6 w-full'>
             <InfoRow
               theme={theme}
               field={t("name")}
-              title={data?.firstName + " " + data?.lastName}
+              title={datas?.firstName + " " + datas?.lastName}
             />
             <InfoRow
               theme={theme}
               field={t("email")}
-              title={data?.email}
-              url={`mailto:${data?.email}`}
+              title={datas?.email}
+              url={`mailto:${datas?.email}`}
             />
             <InfoRow
               theme={theme}
               field={t("phone")}
-              title={data?.phone}
-              url={`tel:${data?.phone}`}
+              title={datas?.phone}
+              url={`tel:${datas?.phone}`}
             />
             <InfoRow
               theme={theme}
               field={t("location")}
-              title={data?.location?.city + " / " + data?.location?.country}
+              title={datas?.location?.city + " / " + datas?.location?.country}
             />
-            <InfoRow theme={theme} field={t("degree")} title={data?.degree} />
+            <InfoRow theme={theme} field={t("degree")} title={datas?.degree} />
             {/* <InfoRow
               theme={theme}
               field={t("freelance")}
               title={
-                data?.freelance
+                datas?.freelance
                   ? t("yes.freelance")
                   : t("no.freelance")
               }
@@ -72,12 +89,12 @@ const About = ({ data }: Props) => {
               theme={theme}
               field={t("remote")}
               title={
-                data?.remote ? t("yes.remote") : t("no.remote")
+                datas?.remote ? t("yes.remote") : t("no.remote")
               }
             /> */}
           </div>
           <div className='flex justify-center w-full items-end flex-1'>
-            {data?.social?.map((item: any) => {
+            {datas?.social?.map((item: any) => {
               return (
                 <Link
                   key={item?.id}
@@ -102,7 +119,7 @@ const About = ({ data }: Props) => {
           theme == "dark" ? "bg-dark5 text-light2" : "bg-light4 text-dark1"
         }`}
       >
-        <div dangerouslySetInnerHTML={{ __html: data?.description }} />
+        <div dangerouslySetInnerHTML={{ __html: datas?.description }} />
       </div>
     </div>
   );

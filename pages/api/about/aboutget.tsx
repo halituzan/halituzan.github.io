@@ -1,14 +1,12 @@
 import connectDBV2 from "@/app/Utils/db/connection";
 import Abouts from "@/app/Utils/models/abouts.model";
-import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 
 connectDBV2();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const about = await Abouts.find({});
-
+    const about = await Abouts.find();
     const payload = {
       firstName: about[0].firstName,
       lastName: about[0].lastName,
@@ -21,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       social: about[0].social,
     };
 
-    return res.status(200).json({
+    return res.json({
       data: payload,
       status: true,
     });
