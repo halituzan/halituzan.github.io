@@ -1,6 +1,8 @@
+import { useTheme } from "@/app/Configs/ThemeContext";
 import { useState } from "react";
 import XLSX from "xlsx";
 const Kelimeler = () => {
+  const { theme } = useTheme();
   const [loading, setLoading] = useState(false);
   const [matches, setMatches] = useState<any[]>([]);
   const [nonMatchingWords, setNonMatchingWords] = useState<string[]>([]);
@@ -92,81 +94,103 @@ const Kelimeler = () => {
   };
 
   return (
-    <div className='p-10 flex w-full'>
-      <div>
-        <label
-          htmlFor='words'
-          className='block text-sm font-medium text-gray-900'
-        >
-          Kelimeler
-        </label>
-        <textarea
-          id='words'
-          cols={100}
-          className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-full'
-          placeholder='Kelimeleri satır atlayarak girin...'
-        ></textarea>
+    <div className='p-10 flex flex-col w-full'>
+      <div className='mb-4'>
+        <h1>Kelime Anlamları Convert Aracı</h1>
+        <p>
+          Satır atlayarak girdiğiniz kelimeleri TDK datası ile karşılaştırarak
+          dataset içinde bulunan kelimelerin anlamlarını bularak excel çıktısı
+          olarak alabileceğiniz bir ara yazılımdır.{" "}
+        </p>
       </div>
-
-      <div className='w-[300px] flex items-start mt-10 justify-center px-10'>
-        <button
-          className='border rounded-lg py-2 w-full bg-slate-500 text-white px-4'
-          onClick={handleButtonClick}
-          disabled={loading}
-        >
-          {loading ? (
-            <div className='relative w-full'>
-              <p className='loading-text'>
-                Dönüştürülüyor <span className='dots'></span>
-              </p>
-            </div>
-          ) : (
-            <div className="w-full">Dönüştür</div>
-          )}
-        </button>
-      </div>
-
-      <div className='self-stretch flex flex-col'>
-        <div className='flex-1'>
+      <div className='flex w-full self-stretch flex-1 h-full'>
+        <div>
           <label
-            htmlFor='message'
-            className='block text-sm font-medium text-gray-900'
+            htmlFor='words'
+            className={`${
+              theme === "dark" ? "text-light5" : "text-dark5"
+            } block text-sm font-medium mb-2`}
           >
-            Anlamı Olan Kelimeler
+            Kelimeler
           </label>
           <textarea
-            id='message'
+            id='words'
             cols={100}
-            value={matches.map((match) => match.madde).join("\n")}
-            readOnly
             className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-full'
+            placeholder='Kelimeleri satır atlayarak girin...'
           ></textarea>
         </div>
 
-        <div className='h-20 self-end'>
+        <div className='w-[300px] flex items-start mt-10 justify-center px-10'>
           <button
-            className='border rounded-lg py-2 bg-slate-500 text-white px-4'
-            onClick={handleDownload}
-            style={{ display: matches.length > 0 ? "inline" : "none" }}
+            className={`${
+              theme === "dark" ? "bg-dark3 text-light5" : "bg-light6 text-dark5"
+            } border rounded-lg py-2  px-4`}
+            onClick={handleButtonClick}
+            disabled={loading}
           >
-            Excele İndir
+            {loading ? (
+              <div className='relative w-full'>
+                <p className='loading-text'>
+                  Dönüştürülüyor <span className='dots'></span>
+                </p>
+              </div>
+            ) : (
+              <div className='w-full'>Dönüştür</div>
+            )}
           </button>
         </div>
 
-        <div className='flex flex-col flex-1'>
-          <label
-            htmlFor='message'
-            className='block mb-2 text-sm font-medium text-gray-900'
-          >
-            Anlamı Olmayan Kelimeler
-          </label>
-          <textarea
-            id='message'
-            cols={100}
-            value={nonMatchingWords.join("\n")}
-            readOnly
-            className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-full self-stretch'
-          ></textarea>
+        <div className='self-stretch flex flex-col'>
+          <div className='flex-1'>
+            <label
+              htmlFor='message'
+              className={`${
+                theme === "dark" ? "text-light5" : "text-dark5"
+              } block text-sm font-medium mb-2`}
+            >
+              Anlamı Olan Kelimeler
+            </label>
+            <textarea
+              id='message'
+              cols={100}
+              value={matches.map((match) => match.madde).join("\n")}
+              readOnly
+              className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-full'
+            ></textarea>
+          </div>
+
+          <div className='h-20 self-end'>
+            <button
+              className={`${
+                theme === "dark"
+                  ? "bg-dark3 text-light5"
+                  : "bg-light6 text-dark5"
+              } border rounded-lg py-2 px-4`}
+              onClick={handleDownload}
+              style={{ display: matches.length > 0 ? "inline" : "none" }}
+            >
+              Excele İndir
+            </button>
+          </div>
+
+          <div className='flex flex-col flex-1'>
+            <label
+              htmlFor='message'
+              className={`${
+                theme === "dark" ? "text-light5" : "text-dark5"
+              } block text-sm font-medium mb-2`}
+            >
+              Anlamı Olmayan Kelimeler
+            </label>
+            <textarea
+              id='message'
+              cols={100}
+              value={nonMatchingWords.join("\n")}
+              readOnly
+              className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-full self-stretch'
+            ></textarea>
+          </div>
         </div>
       </div>
     </div>
