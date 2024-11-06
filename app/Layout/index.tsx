@@ -24,8 +24,7 @@ const Layout = ({ children }: Props) => {
   const currentSide = useSelector(selectCurrentSide);
   const selectPageList = useSelector(selectedPageList);
   const currentSideStorage = localStorage.getItem("currentSide");
-  const mainBg =
-    theme === "dark" ? "bg-dark4 text-light5/90" : "bg-light4";
+  const mainBg = theme === "dark" ? "bg-dark4 text-light5/90" : "bg-light4";
 
   return (
     <div
