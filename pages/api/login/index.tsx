@@ -29,12 +29,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // Create JWT token
-    if (!process.env.NEXT_PUBLIC_JWT_SECRET) {
+    if (!process.env.JWT_SECRET) {
       return;
     }
     const token = jwt.sign(
       { userId: user._id },
-      process.env.NEXT_PUBLIC_JWT_SECRET
+      process.env.JWT_SECRET
     );
 
     if (!device) {

@@ -1,12 +1,12 @@
 import { JwtPayload, verify } from "jsonwebtoken";
 
 const userControl = (token: string, res: any) => {
-  if (!process.env.NEXT_PUBLIC_JWT_SECRET) {
+  if (!process.env.JWT_SECRET) {
     return;
   }
   const { userId } = verify(
     token,
-    process.env.NEXT_PUBLIC_JWT_SECRET
+    process.env.JWT_SECRET
   ) as JwtPayload;
 
   // TODO: Kullanıcı Kontrolü: userId dönmezse token geçersiz.

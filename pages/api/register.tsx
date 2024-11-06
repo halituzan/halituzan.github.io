@@ -28,7 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const token = jwt.sign(
       { email: email },
-      process.env.NEXT_PUBLIC_JWT_SECRET || ""
+      process.env.JWT_SECRET || ""
     );
     // Hash password
     const salt = await bcrypt.genSalt(10);
