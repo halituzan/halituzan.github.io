@@ -50,16 +50,7 @@ const Kelimeler = () => {
 
       // CSV Output
       if (foundMatches.length) {
-        let maxMeaningsCount = 0;
-        foundMatches.forEach((match: any) => {
-          if (
-            match.anlamlarListe &&
-            match.anlamlarListe.length > maxMeaningsCount
-          ) {
-            maxMeaningsCount = match.anlamlarListe.length;
-          }
-        });
-
+        const maxMeaningsCount = 17; // Limit the number of meanings to 17
         const headerRow = ["kelime"];
         for (let i = 1; i <= maxMeaningsCount; i++) {
           headerRow.push(`anlam${i}`);
@@ -68,14 +59,16 @@ const Kelimeler = () => {
         const rows = [headerRow]; // Add header row
 
         foundMatches.forEach((match: any) => {
-          const row = [match._id, match.madde_id, match.madde];
-          match.anlamlarListe.forEach((meaning: any) => {
-            row.push(meaning.anlam);
-          });
+          const row = [match.madde];
+          match.anlamlarListe
+            .slice(0, maxMeaningsCount)
+            .forEach((meaning: any) => {
+              row.push(meaning.anlam);
+            });
 
           // Fill missing columns with empty strings
           for (let i = match.anlamlarListe.length; i < maxMeaningsCount; i++) {
-            row.push("");
+            row.push(""); // Fill missing columns with empty strings
           }
 
           rows.push(row);
@@ -90,7 +83,6 @@ const Kelimeler = () => {
 
     setLoading(false); // Hide loading
   };
-
   const handleDownload = () => {
     const rows = csvData.split("\n").map((row) => row.split(","));
     const ws = XLSX.utils.aoa_to_sheet(rows);
@@ -116,13 +108,21 @@ const Kelimeler = () => {
         ></textarea>
       </div>
 
-      <div className='w-[300px] flex items-start mt-10 justify-center'>
+      <div className='w-[300px] flex items-start mt-10 justify-center px-10'>
         <button
-          className='border rounded-lg py-2 bg-slate-500 text-white px-4'
+          className='border rounded-lg py-2 w-full bg-slate-500 text-white px-4'
           onClick={handleButtonClick}
           disabled={loading}
         >
-          {loading ? "Dönüştürülüyor..." : "Dönüştür >"}
+          {loading ? (
+            <div className='relative w-full'>
+              <p className='loading-text'>
+                Dönüştürülüyor <span className='dots'></span>
+              </p>
+            </div>
+          ) : (
+            <div className="w-full">Dönüştür</div>
+          )}
         </button>
       </div>
 
