@@ -21,9 +21,13 @@ const network = class NETWORK {
   [x: string]: any;
 
   constructor(axios: { create: (arg0: { baseURL: string }) => any }) {
+    const baseURL: any =
+      process.env.NODE_ENV === "production"
+        ? process.env.BASE_URL_PROD
+        : process.env.BASE_URL_DEV;
+
     this.network = axios.create({
-      //   baseURL: "https://halituzan.vercel.app/api",
-      baseURL: "http://localhost:3000/api",
+      baseURL,
     });
   }
 
