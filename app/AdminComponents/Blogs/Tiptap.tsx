@@ -77,7 +77,7 @@ export default ({ setOpen, current, mount }: any) => {
 
   const getTags = async () => {
     try {
-      const res = await Network.run(null, "GET", "/tags", null);
+      const res = await Network.run(null, "GET", "/api/tags", null);
       setTagList(res.data);
     } catch (error) {
       console.log(error);
@@ -85,7 +85,7 @@ export default ({ setOpen, current, mount }: any) => {
   };
   const createPost = async () => {
     try {
-      await Network.run(null, "POST", "/blogs/create", values);
+      await Network.run(null, "POST", "/api/blogs/create", values);
       setOpen(false);
       mount();
     } catch (error) {
@@ -94,7 +94,7 @@ export default ({ setOpen, current, mount }: any) => {
   };
   const updatePost = async () => {
     try {
-      await Network.run(null, "PATCH", `/blogs/update`, {
+      await Network.run(null, "PATCH", `/api/blogs/update`, {
         ...values,
         id: current._id,
       });
@@ -106,7 +106,7 @@ export default ({ setOpen, current, mount }: any) => {
   };
   const deletePost = async () => {
     try {
-      await Network.run(null, "DELETE", `/blogs/delete`, {
+      await Network.run(null, "DELETE", `/api/blogs/delete`, {
         id: current._id,
       });
       setOpen(false);

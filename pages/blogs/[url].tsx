@@ -38,7 +38,7 @@ export async function getServerSideProps(context: any) {
     const res = await Network.run(
       context,
       "GET",
-      `/blogs/detail?code=${code}`,
+      `/api/blogs/detail?code=${code}`,
       null
     );
     return {

@@ -18,7 +18,7 @@ export default BlogsPage;
 
 export async function getServerSideProps(context: any) {
   try {
-    const res = await Network.run(context, "GET", `/blogs`, null);
+    const res = await Network.run(context, "GET", `/api/blogs`, null);
 
     return {
       props: {

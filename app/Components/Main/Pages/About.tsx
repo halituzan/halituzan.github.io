@@ -17,7 +17,7 @@ const About = ({ data }: Props) => {
 
   const getData = async () => {
     try {
-      const res = await Network.run(null, "GET", "about/aboutget", null);
+      const res = await Network.run(null, "GET", "/api/about/aboutget", null);
       setDatas(res.data);
     } catch (error) {
       console.log(error);

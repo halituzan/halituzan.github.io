@@ -83,7 +83,7 @@ const Navbar = (props: Props) => {
       const res = await Network.run(
         null,
         "GET",
-        `/blogs/search?s=${value}`,
+        `/api/blogs/search?s=${value}`,
         null
       );
       setSeachList(res.data);

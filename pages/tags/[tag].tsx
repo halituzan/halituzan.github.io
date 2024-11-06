@@ -25,7 +25,7 @@ export async function getServerSideProps(context: any) {
     const res = await Network.run(
       context,
       "GET",
-      `/blogs/blogtags?tag=${tag}`,
+      `/api/blogs/blogtags?tag=${tag}`,
       null
     );
     return {

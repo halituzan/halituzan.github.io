@@ -24,7 +24,7 @@ const network = class NETWORK {
     const baseURL: any =
       process.env.NODE_ENV === "production"
         ? process.env.BASE_URL
-        : process.env.BASE_URL_DEV;
+        : "http://localhost:3000";
 
     this.network = axios.create({
       baseURL,

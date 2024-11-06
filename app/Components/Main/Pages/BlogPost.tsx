@@ -21,7 +21,7 @@ const SingleBlogPost = ({ data, code }: Props) => {
       await Network.run(
         null,
         "GET",
-        "/blogs/interactions/" + endpoint + "?code=" + code,
+        "/api/blogs/interactions/" + endpoint + "?code=" + code,
         null
       );
     } catch (error) {

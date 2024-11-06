@@ -17,7 +17,7 @@ export default AboutPage;
 
 export async function getServerSideProps(context: any) {
   try {
-    const res = await Network.run(context, "GET", "about/aboutget", null);
+    const res = await Network.run(context, "GET", "/api/about/aboutget", null);
 
     return {
       props: {

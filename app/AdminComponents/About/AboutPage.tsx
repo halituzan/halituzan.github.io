@@ -43,8 +43,8 @@ const AboutPage = (props: Props) => {
 
   const getAbout = async () => {
     try {
-      const res = await Network.run(null, "GET", "/about/aboutget", null);
-      const icons = await Network.run(null, "GET", "icons", null);
+      const res = await Network.run(null, "GET", "/api/about/aboutget", null);
+      const icons = await Network.run(null, "GET", "/api/icons", null);
       setValues(res.data);
       setIconList(icons.data ?? []);
     } catch (error) {
@@ -77,7 +77,7 @@ const AboutPage = (props: Props) => {
       const res = await Network.run(
         null,
         !dataOk ? "POST" : "PATCH",
-        "/about/updateabout",
+        "/api/about/updateabout",
         {
           data: values,
           method: !dataOk ? "POST" : "PATCH",
