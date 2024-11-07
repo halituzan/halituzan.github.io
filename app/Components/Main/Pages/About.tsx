@@ -6,10 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Loading from "../../Patterns/Loading";
 
 const About = () => {
   const [datas, setDatas] = useState<any>({});
-
+  console.log("datas", datas);
   const getData = async () => {
     try {
       const res = await Network.run(null, "GET", "/api/about/aboutget", null);
@@ -25,6 +26,11 @@ const About = () => {
 
   const { t } = useTranslation("profile");
   const { theme } = useTheme();
+
+  if (!datas.email) {
+    return <Loading />;
+  }
+
   return (
     <div
       className={`flex-1 flex flex-col md:flex-row items-start justify-between md:gap-5 w-full h-full overflow-y-auto ${

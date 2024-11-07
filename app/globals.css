@@ -1,5 +1,4 @@
 @tailwind base;
-
 @tailwind components;
 @tailwind utilities;
 
@@ -14,7 +13,11 @@
 }
 
 .circle {
-    @apply w-4 h-4 my-12 mx-1 bg-orange-500 rounded-full;
+    width: 4px;
+    height: 4px;
+    margin: 1.5rem 0.3125rem;
+    background-color: var(--bg-default-500);
+    border-radius: 50%;
 }
 
 html {
@@ -133,17 +136,46 @@ pre {
 .dots::after {
     content: '.';
     animation: loadingDots 1.5s infinite steps(3, end);
-  }
-  
-  @keyframes loadingDots {
-    0% { content: '.'; }
-    10% { content: '..'; }
-    20% { content: '...'; }
-    40% { content: '....'; }
-    50% { content: '.....'; }
-    60% { content: '......'; }
-    70% { content: '.......'; }
-    80% { content: '........'; }
-    90% { content: '.........'; }
-    100% { content: '.'; }
-  }
+}
+
+@keyframes loadingDots {
+    0% {
+        content: '.';
+    }
+
+    10% {
+        content: '..';
+    }
+
+    20% {
+        content: '...';
+    }
+
+    40% {
+        content: '....';
+    }
+
+    50% {
+        content: '.....';
+    }
+
+    60% {
+        content: '......';
+    }
+
+    70% {
+        content: '.......';
+    }
+
+    80% {
+        content: '........';
+    }
+
+    90% {
+        content: '.........';
+    }
+
+    100% {
+        content: '.';
+    }
+}
