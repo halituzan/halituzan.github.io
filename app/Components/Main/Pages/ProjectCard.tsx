@@ -17,7 +17,7 @@ function ProjectCard({ item }: Props) {
         {item.project.map((itm: any) => {
           return (
             <div
-              className='col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 rounded-t-xl'
+              className='col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3 rounded-t-xl'
               key={itm.id}
             >
               <Image

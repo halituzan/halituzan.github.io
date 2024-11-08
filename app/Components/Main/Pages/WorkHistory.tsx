@@ -14,7 +14,7 @@ function WorkHistory({}: Props) {
   const { theme } = useTheme();
   return (
     <div
-      className={`flex-1 flex flex-col items-start md:gap-5 w-full h-[calc(100vh-108px)] overflow-y-auto ${
+      className={`flex-1 flex flex-col items-start md:gap-5 w-full h-[calc(100vh-68px)] overflow-y-auto ${
         theme === "dark" ? "bg-dark4" : "bg-light2"
       }`}
     >
@@ -36,25 +36,28 @@ function WorkHistory({}: Props) {
             <div>
               <p>{t(item.description)}</p>
             </div>
-            <div className='mt-2 flex flex-col'>
-              <p className='mr-1 mb-2'>{t("text.technologies")}: </p>
-              <div className='flex flex-wrap'>
-                {item.technologies.map((i) => {
-                  return (
-                    <p
-                      key={i}
-                      className={`px-3 py-1 rounded border mr-1 mt-1 cursor-pointer select-none ${
-                        theme === "dark"
-                          ? "hover:bg-slate-400 hover:text-white border-slate-500"
-                          : "hover:bg-slate-400 hover:text-white border-slate-500"
-                      } `}
-                    >
-                      {i}
-                    </p>
-                  );
-                })}
+            {item.technologies.length > 0 && (
+              <div className='mt-2 flex flex-col'>
+                <p className='mr-1 mb-2'>{t("text.technologies")}: </p>
+                <div className='flex flex-wrap'>
+                  {item.technologies.map((i) => {
+                    return (
+                      <p
+                        key={i}
+                        className={`px-3 py-1 rounded border mr-1 mt-1 cursor-pointer select-none ${
+                          theme === "dark"
+                            ? "hover:bg-slate-400 hover:text-white border-slate-500"
+                            : "hover:bg-slate-400 hover:text-white border-slate-500"
+                        } `}
+                      >
+                        {i}
+                      </p>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
+
             {item.project.length > 0 && <ProjectCard item={item} />}
           </div>
         );
